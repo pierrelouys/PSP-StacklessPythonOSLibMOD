@@ -337,6 +337,8 @@ This sample will not run on PPSSPP unless the original system fonts are installe
 
 The OSLibMOD version of PSP-StacklessPython supports the OSLib font format (.oft). These font files can be created with the conversion utility found here: [OSLFonts](https://github.com/pierrelouys/OSLFonts/tree/main).
 
+![netDialog](img/fonts_test.png)
+
 ```
 # -*- coding: ISO-8859-1 -*-
 

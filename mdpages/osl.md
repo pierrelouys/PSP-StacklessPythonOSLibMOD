@@ -2,6 +2,8 @@
 
 The documentation for this module is being reconstructed. The accuracy of this page cannot be guaranteed.
 
+Most of the methods listed below wrap OSLib Mod functions, so it can be helpful to check out the [OSLib Mod documentation (archived)](https://web.archive.org/web/20080505080734/http://www.sakya.it/OSLib_MOD/doc/html).
+
 ---
 
 ## Table of Contents
@@ -25,8 +27,8 @@ The documentation for this module is being reconstructed. The accuracy of this p
 The osl.Controller class represents a game controller and provides access to its button states, analog stick positions, and auto-repeat settings.
 
 #### Methods
-- **`__init__`(...):** x.`__init__`(...) Constructor. Creates a new Controller object and initializes it with the current state of the controller by reading key inputs.
-    - Parameters: None
+- **__init__():**
+    - Description: Creates a new Controller object and initializes it with the current state of the controller by reading key inputs.
     - Returns: A Controller object.
 
 #### Data Descriptors
@@ -83,7 +85,7 @@ The osl.Controller class represents a game controller and provides access to its
 - **released_up**
 
 #### Data and other attributes
-- **`__new__`** = `<built-in method __new__ of type object at 0x8ac9380>`
+- **__new__** = `<built-in method __new__ of type object at 0x8ac9380>`
 ---
 
 ### [Error](#error)
@@ -95,28 +97,28 @@ The osl.Controller class represents a game controller and provides access to its
 - [__builtin__.object](#__builtin__.object)
 
 #### Data descriptors
-- **`__weakref__`**: list of weak references to the object (if defined)
+- **__weakref__**: list of weak references to the object (if defined)
 
 #### Methods inherited from [exceptions.Exception](#Exception):
-- **`__init__`(...):** x.<a href="#Error-__init__">`__init__`</a>(...) initializes x; see x.__class__.__doc__ for signature
+- **__init__(...):** x.<a href="#Error-__init__">`__init__`</a>(...) initializes x; see x.__class__.__doc__ for signature
 
 #### Data and other attributes inherited from [exceptions.Exception](#Exception):
-- **`__new__`** = `<built-in method __new__ of type object at 0x8abb148>`
+- **__new__** = `<built-in method __new__ of type object at 0x8abb148>`
 
 #### Methods inherited from [exceptions.BaseException](#BaseException):
-- **`__delattr__`(...):** x.<a href="#Error-__delattr__">`__delattr__`</a>('name') <==> del x.name
-- **`__getattribute__`(...):** x.<a href="#Error-__getattribute__">`__getattribute__`</a>('name') <==> x.name
-- **`__getitem__`(...):** x.<a href="#Error-__getitem__">`__getitem__`</a>(y) <==> x[y]
-- **`__getslice__`(...):** x.<a href="#Error-__getslice__">`__getslice__`</a>(i, j) <==> x[i:j]  
+- **__delattr__(...):** x.<a href="#Error-__delattr__">`__delattr__`</a>('name') <==> del x.name
+- **__getattribute__(...):** x.<a href="#Error-__getattribute__">`__getattribute__`</a>('name') <==> x.name
+- **__getitem__(...):** x.<a href="#Error-__getitem__">`__getitem__`</a>(y) <==> x[y]
+- **__getslice__(...):** x.<a href="#Error-__getslice__">`__getslice__`</a>(i, j) <==> x[i:j]  
   (Use of negative indices is not supported.)
-- **`__reduce__`(...):** MISSING_DOC
-- **`__repr__`(...):** x.<a href="#Error-__repr__">`__repr__`</a>() <==> repr(x)
-- **`__setattr__`(...):** x.<a href="#Error-__setattr__">`__setattr__`</a>('name', value) <==> x.name = value
-- **`__setstate__`(...):** MISSING_DOC
-- **`__str__`(...):** x.<a href="#Error-__str__">`__str__`</a>() <==> str(x)
+- **__reduce__(...):** MISSING_DOC
+- **__repr__(...):** x.<a href="#Error-__repr__">`__repr__`</a>() <==> repr(x)
+- **__setattr__(...):** x.<a href="#Error-__setattr__">`__setattr__`</a>('name', value) <==> x.name = value
+- **__setstate__(...):** MISSING_DOC
+- **__str__(...):** x.<a href="#Error-__str__">`__str__`</a>() <==> str(x)
 
 #### Data descriptors inherited from [exceptions.BaseException](#BaseException):
-- **`__dict__`**
+- **__dict__**
 - **`args`**
 - **`message`**: exception message
 
@@ -125,11 +127,11 @@ The osl.Controller class represents a game controller and provides access to its
 ### [Font](#font)
 
 #### Methods
-- **`__init__`(...):** x.<a href="#Font-__init__">`__init__`</a>(filename) Loads a font from a file.
+- **__init__(...):** x.<a href="#Font-__init__">`__init__`</a>(filename) Loads a font from a file.
 - **set**(...): Sets this font as the current font.
 
 #### Data and other attributes
-- **`__new__`** = `<built-in method __new__ of type object at 0x8ac9e5c>`
+- **__new__** = `<built-in method __new__ of type object at 0x8ac9e5c>`
 ---
 
 ### [Image](#image)
@@ -137,35 +139,34 @@ The osl.Controller class represents a game controller and provides access to its
 The image module provides PSP-specific image manipulation and rendering, leveraging the OSLib graphics library for hardware-accelerated operations.
 
 #### Methods
-- **`__init__`(...):** x.<a href="#Image-__init__">`__init__`</a> initializes the image from a file or creates an image.
+- **__init__(...):** x.<a href="#Image-__init__">`__init__`</a> initializes the image from a file or creates an image.
 - **clear**(color): 
     - Description: Clears the image with the specified color.
     - Parameters:
         - color: The color to use to clear the image.
-    - Returns: None.
     - Notes: Clears the image with a given color.
 - **convert**(newLocation, newFormat): 
     - Purpose: Converts an image to a new memory location and pixel format on the PSP.
     - Parameters: 
         - newLocation: Integer specifying memory location (e.g., osl.IN_RAM, osl.IN_VRAM).
-        - newFormat: Integer specifying pixel format (e.g., OSL_PF_8888, OSL_PF_5650).
+        - newFormat: Integer specifying pixel format (e.g., osl.PF_8888, osl.PF_5650).
     - Returns: A new image object with the converted image, or raises an exception on failure.
-    - Notes:
-        - Use PSP-specific constants (e.g., osl.IN_VRAM) defined in the OSLib module.
-        - VRAM conversions optimize rendering performance.
-- **copy**(...): Copies another image into this one.
+    - Notes: wraps oslConvertImageTo().
+- **copy**(other, newLocation): 
+    - Description: Copies another image into this one.
+    - Parameters:
+        - other: The image to copy from.
+        - newLocation: The target location for the copied image (optional).
+	- Notes: wraps oslCreateImageCopy().
 - **correctHalfBorder**(): 
     - Description: Corrects the half-border issue in the image.
-    - Parameters: None.
-	- Returns: None.
-    - Notes: Wraps oslCorrectImageHalfBorder().
+    - Notes: wraps oslCorrectImageHalfBorder().
 - **draw**(x, y): 
     - Description: Draws the image at the specified coordinates on the screen.
     - Parameters:
         - x: The x-coordinate for the image's position.
         - y: The y-coordinate for the image's position.
-        - Returns: None.
-	- Notes: Wraps oslDrawImage().
+	- Notes: wraps oslDrawImage().
 - **getpixel**(x, y): 
     - Description: Retrieves the color value of a specific pixel in the image.
     - Parameters:
@@ -174,92 +175,68 @@ The image module provides PSP-specific image manipulation and rendering, leverag
     - Returns: The pixel color value.
 - **lock**(): 
     - Description: Locks the image for safe manipulation.
-    - Parameters: None.
-    - Returns: None.
     - Notes: oslLockImage()
 - **mirrorH**():
     - Description: Mirrors the image horizontally.
-    - Parameters: None.
-    - Returns: None.
     - Notes: Flips the image along the vertical axis.
-- **mirrorV**(...):
+- **mirrorV**():
     - Description: Mirrors the image vertically.
-    - Parameters: None.
-    - Returns: None.
     - Notes: Flips the image along the horizontal axis.
 - **move**(newLocation):
     - Purpose: Moves an image to a different memory location (e.g., RAM to VRAM).
     - Parameters:
         - newLocation: Integer specifying target memory location (e.g., osl.IN_RAM, osl.IN_VRAM).
-    - Returns: None
-    - Notes:
-        - Useful for optimizing memory usage or rendering speed.
+    - Notes: wraps oslMoveImageTo().
 - **rotate**(angle):
     - Description: Rotates the image by the specified angle.
     - Parameters:
         - angle: The angle (in degrees) to rotate the image.
-    - Returns: None.
     - Notes: The image will be rotated by the specified angle, which can be negative or positive.
 - **setFrame**(frame):
     - Description: Sets the frame number for the image (useful for animated images).
     - Parameters:
         - frame: The frame number to set.
-    - Returns: None.
     - Notes: Changes the current frame of the image if it is an animation.
 - **setFrameSize**(w, h):
     - Description: Sets the frame size for the image.
     - Parameters:
         - w: The width of the frame.
         - h: The height of the frame.
-    - Returns: None.
     - Notes: Adjusts the size of the frame that the image is displayed in.
 - **setRotationCenter**():
     - Description: Sets the center point for rotating the image.
-    - Parameters: None.
-    - Returns: None.
 - **setpixel**(x, y, pixelValue): 
     - Description: Sets the color value of a specific pixel in the image.
     - Parameters:
         - x: The x-coordinate of the pixel.
         - y: The y-coordinate of the pixel.
         - pixelValue: The color value to assign to the pixel.
-    - Returns: None.
     - Notes: Sets the pixel color at the specified coordinates, locking the image during modification.
 - **swizzle**(dst): 
     - Description: Swizzles the current image, changing its internal layout.
-    - Parameters: None.
-    - Returns: None.
     - Notes: Alters the internal layout of the image for optimization or performance. Wraps oslSwizzleImage(dst, self)
-- **swizzleto**(...): 
+- **swizzleto**(other): 
     - Description: Swizzles the current image to match another image's layout.
     - Parameters:
         - other: The image whose layout will be matched.
-    - Returns: None.
 - **tile**(x0, y0, x1, y1): 
     - Description: Creates a tiled copy of the image.
     - Parameters:
-        - x0: The starting x-coordinate for the tile.
-        - y0: The starting y-coordinate for the tile.
-        - x1: The ending x-coordinate for the tile.
-        - y1: The ending y-coordinate for the tile.
+        - x0, y0: Coordinates for the top-left corner of the tile.
+        - x1, y1: Coordinates for the bottom-right corner of the tile.
     - Returns: A new osl.Image object with the tiled image.
-    - Notes: Wraps oslCreateImageTile()
+    - Notes: wraps oslCreateImageTile()
 - **uncache**(): 
     - Description: Removes the image from memory, freeing resources.
-    - Parameters: None.
-    - Returns: None.
-    - Notes: Wraps oslUncacheImage().
+    - Notes: wraps oslUncacheImage().
 - **unlock**():
     - Description: Unlocks the image after it has been manipulated.
-    - Parameters: None.
-    - Returns: None.
     - Notes: oslUnlockImage()
 - **write**(filename, flags):
     - Description: Writes the image to a file.
     - Parameters:
         - filename: The name of the file to write the image to.
         - flags: Optional flags for saving (default is 0).
-    - Returns: None.
     - Notes: Saves the image to a file using the specified filename and flags.
 
 #### Data descriptors
@@ -279,47 +256,97 @@ The image module provides PSP-specific image manipulation and rendering, leverag
 - **y**: Gets or sets the y-coordinate of the image’s position.
 
 #### Data and other attributes
-- **`__new__`** = `<built-in method __new__ of type object at 0x8ac8ef4>`
+- **__new__** = `<built-in method __new__ of type object at 0x8ac8ef4>`
 ---
 
 ### [Map](#map)
 
 #### Methods
-- **`__init__`(...):** x.<a href="#Map-__init__">`__init__`</a>(img, data, tileX, tileY) 'img' must be an instance of osl.Image.
-- **draw**(...): Wraps oslDrawMap().
-- **drawSimple**(...): Wraps oslDrawMapSimple().
+- **__init__(img, data, tileX, tileY):**
+    - Description: Initializes the map with an image and tile data.
+    - Parameters:
+        - img: A osl.Image object representing the image to be used for the map.
+        - data: A list of lists, where each sublist represents a row of tiles in the map, and each element is an integer value corresponding to a tile.
+        - tileX: An integer representing the tile's horizontal size in the map.
+        - tileY: An integer representing the tile's vertical size in the map.
+    - Notes: wraps oslCreateMap().
+
+- **draw**():
+    - Description: Draws the map.
+    - Notes: wraps oslDrawMap().
+- **drawSimple**(): Wraps oslDrawMapSimple().
+    - Description: Draws the map to the screen using a simplified rendering method.
+    - Notes: wraps oslDrawMapSimple(). From the OSLib Mod docs: "Same as oslDrawMap, only here for backward compatibility. Do not use!"
 
 #### Data descriptors
 - **scrollX**
 - **scrollY**
 
 #### Data and other attributes
-- **`__new__`** = `<built-in method __new__ of type object at 0x8ac9bf0>`
+- **__new__** = `<built-in method __new__ of type object at 0x8ac9bf0>`
 ---
 
 ### [SFont](#sfont)
 
 #### Methods
-- **`__init__`(...):** x.<a href="#SFont-__init__">`__init__`</a>(...) initializes x.
-- **drawString**(...): MISSING_DOC
-- **measureText**(...): MISSING_DOC
+- **__init__(filename, format):**
+    - Description: Initializes a new SFont object by loading a font file.
+    - Parameters:
+        - filename: The path to the font file to load (string).
+        - format: The pixel format for the font (integer, default is osl.PF_8888).
+    - Notes: wraps oslLoadSFontFile().
+- **drawString**(x, y, text):
+    - Description: Draws a string of text at the specified coordinates using the loaded font.
+    - Parameters:
+        - x: The x-coordinate for where the text will be drawn (integer).
+        - y: The y-coordinate for where the text will be drawn (integer).
+        - text: The string of text to be drawn (string).
+	- Returns: The result of the drawing operation (integer, typically 0 for success or an error code).
+    Notes: wraps oslSFontDrawText().
+- **measureText**(text):
+    - Description: Measures the width of the given text when drawn using the current font.
+    - Parameters:
+	    - text: The string of text to be measured (string).
+    - Returns: The width of the text in pixels (integer).
+    - Notes: wraps oslGetSFontTextWidth().
 
 #### Data and other attributes
-- **`__new__`** = `<built-in method __new__ of type object at 0x8aca07c>`
+- **__new__** = `<built-in method __new__ of type object at 0x8aca07c>`
 ---
 
 ### [Sound](#sound)
 
 #### Methods
-- **`__init__`(...):** x.<a href="#Sound-__init__">`__init__`</a>(...) initializes x.
-- **getChannel**(...): Returns the channel used for this sound.
-- **loop**(loop=1): Sets looping on/off.
-- **pause**(pause=1): Pauses the playback.
-- **play**(voice=0): Plays the sound.
-- **stop**(...): Stops playing.
+- **__init__(filename, fmt):**
+    - Description: Initializes a new sound object by loading a sound file.
+    - Parameters:
+        - filename (string): The name of the sound file to load (e.g., "sound.wav").
+        - fmt (integer, optional): The format of the sound (default is osl.FMT_NONE).
+- **getChannel**():
+    - Description: Retrieves the channel number currently playing the sound.
+    - Returns: The channel number (integer).
+    - Notes: wraps oslGetSoundChannel().
+- **loop**(loop=1):
+    - Description: Sets whether the sound should loop.
+    - Parameters:
+        - loop (integer, optional): 1 to loop, 0 to stop looping (default is 1).
+    - Notes: wraps oslSetSoundLoop().
+- **pause**(pause=1):
+    - Description: Pauses or unpauses the currently playing sound.
+    - Parameters:
+        - pause (integer, optional): 1 to pause, 0 to unpause (default is 1).
+    - Notes: wraps oslPauseSound().
+- **play**(voice=0):
+    - Description: Plays the loaded sound.
+    - Parameters:
+        - voice (integer, optional): The voice channel to play the sound on (default is 0).
+    - Notes: wraps oslPlaySound().
+- **stop**():
+    - Description: Stops the currently playing sound.
+    - Notes: wraps oslStopSound().
 
 #### Data and other attributes
-- **`__new__`** = `<built-in method __new__ of type object at 0x8ac9990>`
+- **__new__** = `<built-in method __new__ of type object at 0x8ac9990>`
 ---
 
 ## Functions
@@ -368,7 +395,7 @@ The image module provides PSP-specific image manipulation and rendering, leverag
         - b: Blue component (integer).
         - a: Alpha component (integer).
     - Returns: A color integer in 12-bit RGBA format.
-- **`RGBA15`**(...):
+- **`RGBA15`**(r, g, b, a):
     - Description: Returns a 15-bit RGBA color.
     - Parameters:
         - r: Red component (integer).
@@ -378,20 +405,15 @@ The image module provides PSP-specific image manipulation and rendering, leverag
     - Returns: A color integer in 15-bit RGBA format.
 - **`audioVSync`**():
     - Description: Synchronizes audio with the video frame rate.
-    - Parameters: None
-    - Return: None
     - Notes: This function is used to sync audio playback with the screen refresh cycle.
 - **`clearScreen`**(color):
     - Purpose: Clears the screen with a specific color.
     - Parameters:
         - color (integer): The color to use for clearing the screen, typically in RGBA format.
             - Example: osl.RGBA(0, 0, 0, 255) for black, where the four integers represent red, green, blue, and alpha (opacity).
-	- Returns: None
 	- Notes: This function is typically called at the beginning of each frame to clear the screen before drawing new content.
 - **`cls`**():
     - Purpose: Clears the console screen.
-    - Parameters: None.
-    - Returns: None.
     - Notes: Used to clear the console screen for fresh output.
 - **`dialogGetResult`**(): 
     - Description: Gets the result of the current dialog (e.g., success or failure).
@@ -399,15 +421,11 @@ The image module provides PSP-specific image manipulation and rendering, leverag
     - Details: This function retrieves the result of the current dialog, which may indicate success, failure, or cancellation.
 - **`disableTransparentColor`**():
     - Description: Disables the transparent color setting.
-    - Returns: None.
 - **`doQuit`**():
     - Purpose: Executes the quit operation for the program.
-    - Parameters: None.
-    - Returns: None.
     - Notes: This will terminate the program immediately.
 - **`drawDialog`**():
     - Description: Draws the dialog on the screen.
-    - Returns: None.
     - Details: This function draws a dialog interface (such as an error or message dialog) onto the screen.
 - **`drawFillRect`**(x1, y1, x2, y2, color):
     - Purpose: Draws a filled rectangle.
@@ -415,14 +433,12 @@ The image module provides PSP-specific image manipulation and rendering, leverag
         - x1, y1: Coordinates of the top-left corner.
         - x2, y2: Coordinates of the bottom-right corner.
         - color: Color of the filled rectangle.
-    - Returns: None.
 - **`drawGradientRect`**(...):
     - Description: Draws a gradient rectangle on the screen.
     - Parameters:
         - x1, y1: Top-left corner coordinates (integers).
         - x2, y2: Bottom-right corner coordinates (integers).
         - c1, c2, c3, c4: Four colors representing the gradient's start and end points (integers).
-    - Returns: None.
     - Details: This function creates a gradient-filled rectangle with four distinct colors, used to create effects like fades or transitions in the graphical interface .
 - **`drawLine`**(x1, y1, x2, y2, color):
     - Purpose: Draws a line between two points.
@@ -430,10 +446,8 @@ The image module provides PSP-specific image manipulation and rendering, leverag
         - x1, y1: Coordinates of the start point.
         - x2, y2: Coordinates of the end point.
         - color: Color of the line.
-    - Returns: None.
 - **`drawOsk`**():
     - Description: Draws the on-screen keyboard (OSK) on the screen.
-    - Returns: None.
     - Details: This function renders the OSK on the screen, allowing the user to interact with it and input text.
 - **`drawRect`**(x1, y1, x2, y2, color):
     - Purpose: Draws a rectangle.
@@ -441,13 +455,11 @@ The image module provides PSP-specific image manipulation and rendering, leverag
         - x1, y1: Coordinates of the top-left corner.
         - x2, y2: Coordinates of the bottom-right corner.
         - color: Color of the rectangle.
-    - Returns: None.
 - **`drawString`**(x, y, string): 
     - Purpose: Draws a string using the current font.
     - Parameters:
         - x, y: Coordinates where to draw the string.
         - string: The string to draw.
-    - Returns: None.
     - Notes: This function is used for basic text rendering. The position (x, y) specifies where the text will appear on the screen, starting from the top-left corner. Text rendering is often used for debugging or displaying simple UI elements.	
 - **`drawTextBox`**(x0, y0, x1, y1, string, format):
     - Description: Draws a text box with specified dimensions and text inside it.
@@ -456,37 +468,25 @@ The image module provides PSP-specific image manipulation and rendering, leverag
         - x1, y1: The bottom-right corner coordinates (integers).
         - text: The text to display inside the box (string).
         - format: Formatting options (integer).
-    - Returns: None.
 - **`endDialog`**():
     - Description: Draws the active dialog to the screen.
-    - Returns: None.
     - Details: This function renders the dialog (whether it’s a message or error dialog) to the screen for the user to interact with.
 - **`endDrawing`**():
     - Purpose: Ends the current drawing session and prepares the buffer for synchronization.
-    - Parameters: None.
-    - Returns: None.
     - Notes: This function finalizes the drawing commands for the current frame. After calling this function, the graphics operations are complete for this frame, and the next step is typically to display the drawn content on the screen.
 - **`endFrame`**():
     - Purpose: Ends the current frame.
-    - Parameters: None.
-    - Returns: None.
 - **`endGfx`**():
     - Description: Ends the current graphics session.
-    - Returns: None.
     - Details: This function terminates any ongoing graphics operations, ensuring that all drawing operations are completed before finishing the session .
 - **`endOsk`**():
     - Description: Ends the on-screen keyboard (OSK) session.
-    - Returns: None.
     - Details: This function closes the OSK and ends the user interaction with it.
 - **`flushDataCache`**():
     - Description: Flushes the PSP’s data cache.
-    - Parameters: None
-    - Return: None
     - Notes: This function is useful when data changes are made in memory that need to be committed to the PSP's memory cache.
 - **`flushKey`**(...):
     - Purpose: Clears the key buffer.
-    - Parameters: None.
-    - Returns: None.
 - **`getDialogButtonPressed`**():
     - Description: Gets the button pressed in the current dialog.
     - Returns: Integer representing the pressed button.
@@ -501,7 +501,6 @@ The image module provides PSP-specific image manipulation and rendering, leverag
     - Details: This function returns the current dialog's type, indicating whether it's a message dialog, error dialog, etc.
 - **`getFPS`**():
     - Purpose: Gets the current FPS (frames per second).
-    - Parameters: None.
     - Returns: Integer FPS value.
 - **`getOskStatus`**():
     - Description: Gets the current status of the on-screen keyboard (OSK).
@@ -509,37 +508,30 @@ The image module provides PSP-specific image manipulation and rendering, leverag
     - Details: This function retrieves the current status of the OSK, indicating whether it's waiting for user input, active, or closed.
 - **`initAudio`**():
     - Description: Initializes the audio system on the PSP.
-    - Parameters: None
-    - Return: None
     - Notes: Call this function before using any audio features on the PSP.
 - **`initConsole`**():
     - Description: Initializes the console for text output.
-    - Returns: None.
 - **`initErrorDialog`**(error):
     - Description: Initializes an error dialog displaying an error code.
     - Parameters:
         - error: The error code to display (integer).
-    - Returns: None.
     - Details: This function initializes an error dialog, allowing the user to view an error code and handle the situation accordingly.
-- **`initGfx`**(pf=OSL_PF_8888, db=1):
+- **`initGfx`**(pf=osl.PF_8888, db=1):
     - Purpose: Initializes the graphics system for the PSP.
     - Parameters:
         - pf (integer): Pixel format for rendering. Common values are:
             - OSL.PF_5551: 16-bit color (RGB format).
             - OSL.PF_8888: 32-bit color (RGBA format).
         - db (integer): Double buffering flag. Set to 1 to enable double buffering (recommended for smoother rendering), or 0 to disable it.
-    - Returns: None
     - Notes: This function must be called before any drawing functions can be used. Double buffering helps to avoid screen tearing and provides smoother animation.
 - **`initMessageDialog`**(message, enableYesno):
     - Description: Initializes a message dialog with a message and an optional Yes/No option.
     - Parameters:
         - message: The message to display in the dialog (string).
         - enableYesno: A flag to enable Yes/No buttons (1 for Yes/No, 0 for OK).
-    - Returns: None.
     - Details: This function sets up a message dialog with the specified message and button options. The message is shown, and the user can choose between the available buttons.
 - **`initNetDialog`**():
     - Description: Initializes the network dialog.
-    - Returns: None.
     - Details: This function initializes a dialog used for network-related operations, such as configuring network settings.
 - **`initOsk`**(descStr, initialStr, textLimit, linesNumber, language=-1):
     - Description: Initializes the on-screen keyboard (OSK) for text input.
@@ -549,27 +541,13 @@ The image module provides PSP-specific image manipulation and rendering, leverag
         - textLimit: Maximum number of characters allowed (integer).
         - linesNumber: Number of lines in the OSK (integer).
         - language: Language for the OSK (optional, integer).
-    - Returns: None.
     - Details: This function initializes the on-screen keyboard, allowing the user to input text on the PSP. It takes parameters for initial text, text limits, number of lines, and language selection.
-- **`intraFontInit`**(options):
-    - Description: Initializes the intraFont system with the given options.
-    - Parameters:
-        - options: Options for the font initialization (integer).
-	- Returns: None.
-    - Details: This function initializes the intraFont library, which allows for rendering text using different fonts. The options parameter specifies how the font system should be initialized.
-- **`intraFontSetStyle`**(font, size, color, shadowcolor, options):
-    - Description: Sets the style of the intraFont text.
-    - Parameters:
-        - font: The font object to use (osl.Font).
-        - size: Font size (float).
-        - color: Text color (integer).
-        - shadowcolor: Shadow color for the text (integer).
-        - options: Additional style options (integer).
-    - Returns: None.
-    - Details: This function allows developers to customize the appearance of text rendered with intraFont by adjusting size, color, shadow color, and other rendering options.
-- **`intraFontShutdown`**():
-    - Description: Shuts down the intraFont system.
-    - Returns: None.
+- <s>**`intraFontInit`**(options):</s>
+	- Note: according to the author of the OSLib Mod, IntraFont doesn't seem to work.
+- <s>**`intraFontSetStyle`**(font, size, color, shadowcolor, options):</s>
+	- Note: according to the author of the OSLib Mod, IntraFont doesn't seem to work.
+- <s>**`intraFontShutdown`**():</s>
+	- Note: according to the author of the OSLib Mod, IntraFont doesn't seem to work.
 - **`kbhit`**():
     - Description: Checks if a key has been pressed.
     - Returns: 1 if a key is pressed, 0 otherwise.
@@ -587,10 +565,8 @@ The image module provides PSP-specific image manipulation and rendering, leverag
     - Parameters:
         - x: The x-coordinate (integer).
         - y: The y-coordinate (integer).
-    - Returns: None.
 - **`mustQuit`**():
     - Purpose: Checks whether the program should quit.
-    - Parameters: None.
     - Returns: Integer value indicating if the program must quit (1 if true, 0 otherwise).
     - Notes: Use this function in your game loop to check if the PSP is requested to exit.
 - **`netInit`**():
@@ -617,7 +593,6 @@ The image module provides PSP-specific image manipulation and rendering, leverag
     - Purpose: Prints text to the console.
     - Parameters:
         - text: The text to print.
-    - Returns: None.
     - Notes: This function outputs text in the console for debugging purposes.
 - **`printxy`**(x, y, text):
     - Description: Prints text to screen at a specific position.
@@ -625,130 +600,102 @@ The image module provides PSP-specific image manipulation and rendering, leverag
         - x: The x-coordinate (integer).
         - y: The y-coordinate (integer).
     - text: The text to print (string).
-    - Returns: None.
 - **`safeQuit`**():
     - Purpose: Marks the program for safe quitting.
-    - Parameters: None.
-    - Returns: None.
     - Notes: This sets a flag to indicate the program should quit, but may not terminate immediately.
 - **`saveScreenshot`**(...):
     - Description: Saves the current screen as a PNG file.
     - Parameters:
         - fileName: The name of the file to save the screenshot as.
-    - Return: None
 - **`setAlpha`**(effect, coeff):
     - Description: Sets the alpha blending effect and coefficient.
     - Parameters:
         - effect: Blending effect type (integer).
         - coeff: Coefficient for the effect (integer).
-    - Returns: None.
 - **`setBilinearFilter`**(enable=1):
     - Description: Enables or disables bilinear filtering.
     - Parameters:
         - enable: Flag to enable (1) or disable (0) bilinear filtering.
-    - Returns: None.
 - **`setBkColor`**(color):
     - Description: Sets the background color for text rendering.
     - Parameters:
         - color: Background color (integer).
-        - Return: None
     - Notes: Used to set the background color behind text strings.
 - **`setDithering`**(enabled):
     - Description: Enables or disables dithering for smoother color transitions.
     - Parameters:
         - enabled: Whether to enable dithering (1 for enabled, 0 for disabled).
-    - Returns: None.
 - **`setDrawBuffer`**(buffer):
     - Description: Sets the drawing buffer to either a custom buffer or one of the predefined constants.
     - Parameters:
         - buffer: A buffer object or a predefined constant (e.g., DEFAULT_BUFFER, SECONDARY_BUFFER, or an osl.Image object).
-    - Returns: None.
     - Details: This function allows you to set the drawing buffer. You can either use a predefined buffer (like DEFAULT_BUFFER) or provide a custom osl.Image object.
 - **`setFrameskip`**(frameskip):
     - Purpose: Sets the frameskip for rendering.
     - Parameters:
         - frameskip: Number of frames to skip.
-    - Returns: None.
 - **`setHoldForAnalog`**(hold): 
     - Description: Sets whether the analog stick should be held for input.
     - Parameters:
         - hold: Whether to enable hold for analog input (1 for enable, 0 for disable).
-    - Returns: None.
     - Details: This function controls whether the analog stick requires a hold to register input, useful for specific analog input behaviors.
 - **`setKeyAnalogToDPad`**(sensivity):
     - Description: Maps analog stick input to the D-Pad with specified sensitivity.
     - Parameters:
         - sensivity: Sensitivity value (integer).
-        - Returns: None.
 - **`setKeyAutorepeat`**(keys, init, interval):
     - Description: Sets up key autorepeat for specified keys.
     - Parameters:
         - keys: The key(s) to set autorepeat for (integer).
         - init: Initial delay before repeating (integer).
         - interval: Delay between repeated key presses (integer).
-    - Returns: None.
 - **`setKeyAutorepeatInit`**(init):
     - Description: Sets the initial delay for key autorepeat.
     - Parameters:
         - init: Initial delay before key autorepeat starts (integer).
-    - Returns: None.
 - **`setKeyAutorepeatInterval`**(interval):
     - Description: Sets the interval between repeated key presses for autorepeat.
     - Parameters:
         - interval: The time between repeated key presses (integer).
-    - Returns: None.
 - **`setKeyAutorepeatMask`**(keys):
     - Description: Sets which keys will have autorepeat functionality enabled.
     - Parameters:
         - keys: Bitmask of keys to enable autorepeat for (integer).
-    - Returns: None.
 - **`setMaxFrameskip`**(frameskip):
     - Purpose: Sets the maximum number of frames to skip.
     - Parameters:
         - frameskip: Maximum frames to skip.
-    - Returns: None.
 - **`setQuitOnLoadFailure`**(...):
     - Description: Sets whether the program should quit if a resource fails to load.
     - Parameters:
         - enabled: Flag to enable or disable quitting on load failure (1 for enabled, 0 for disabled).
-    - Returns: None.
     - Details: This function allows the developer to specify whether the program should automatically quit if it fails to load a resource (e.g., an image or file) .
 - **`setScreenClipping`**(...):
     - Description: Sets the screen clipping area.
     - Parameters:
         - x1, y1: Top-left corner of the clipping area (integers).
         - x2, y2: Bottom-right corner of the clipping area (integers).
-    - Returns: None.
     - Details: This function restricts drawing operations to a specific rectangular area on the screen, ensuring that drawing commands only affect the defined region .
 - **`setTextColor`**(color):
     - Description: Sets the text color for drawing strings.
     - Parameters:
         - color: The text color to use (integer).
-    - Return: None
     - Notes: Use this function before rendering text to change its color.
 - **`setTransparentColor`**(color):
     - Purpose: Sets the transparent color for drawing.
     - Parameters:
         - color: The color to use as transparent (integer).
-    - Returns: None.
 - **`startDrawing`**():
     - Purpose: Begins the drawing process for the current frame.
-    - Parameters: None.
-    - Returns: None.
     - Notes: This function prepares the drawing buffer for the next set of graphical commands. It must be called before drawing anything on the screen.
 - **`swapBuffers`**():
     - Purpose: Swaps the drawing buffer with the screen.
-    - Parameters: None.
-    - Returns: None.
     - Notes: Used in double buffering to display the final drawing.
 - **`syncDrawing`**():
     - Purpose: Synchronizes the drawing buffer to the screen.
-    - Parameters: None.
-    - Returns: None.
     - Notes: Useful when managing frames in high-performance games.
 - **`syncFrame`**():
     - Purpose: Synchronizes the frame to the screen, ensuring smooth animation.
-    - Parameters: None.
     - Returns: Integer result (sync status).
 - **`syncFrameEx`**(skip, maxskip, vsync):
     - Description: Synchronizes the frame with the ability to skip a number of frames.
@@ -756,14 +703,11 @@ The image module provides PSP-specific image manipulation and rendering, leverag
         - skip: Number of frames to skip (integer).
         - maxskip: Maximum number of frames to skip (integer).
         - vsync: VSync flag (integer).
-    - Returns: None.
 - **`waitKey`**():
     - Purpose: Waits for a key press.
-    - Parameters: None.
     - Returns: Integer value representing the key pressed.
 - **`waitVSync`**(): 
     - Description: Waits for vertical sync to avoid tearing during screen updates.
-    - Returns: None.
 
 ---
 
