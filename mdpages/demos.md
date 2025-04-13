@@ -824,6 +824,282 @@ main()
 osl.endGfx()
 ```
 
+### pspmp3 module test
+
+Untested. Not expected to work on PPSSPP due to the lack of implementation of Media Engine emulation. The script assumes a `song.mp3` file within the script's folder.
+
+```
+# -*- coding: utf-8 -*-
+import pspmp3
+import osl
+import os
+
+# Initialize graphics (16-bit, full-screen)
+osl.initGfx(osl.PF_5551, 1)
+
+# Global variables for function navigation
+current_function = 0  # The current function index (0-based)
+functions = [
+    ("pspmp3.init(chan)", "Purpose: Initializes the MP3 subsystem.\nParameters: chan (int) - Audio channel for playback.\nReturn: None.\nNotes: Must be called before loading and playing MP3 files."),
+    ("pspmp3.load(path)", "Purpose: Loads an MP3 file.\nParameters: path (str) - Path to the MP3 file.\nReturn: None.\nNotes: The MP3 file must be loaded before playback."),
+    ("pspmp3.play(loop)", "Purpose: Starts playing a loaded MP3 file.\nParameters: loop (int) - Loop playback if non-zero.\nReturn: None.\nNotes: Starts playback of the MP3."),
+    ("pspmp3.stop()", "Purpose: Stops MP3 playback.\nParameters: None.\nReturn: None.\nNotes: Stops the current playback."),
+    ("pspmp3.pause()", "Purpose: Pauses MP3 playback.\nParameters: None.\nReturn: None.\nNotes: Pauses playback, can be resumed by calling pause again."),
+    ("pspmp3.endofstream()", "Purpose: Checks if the MP3 stream has ended.\nParameters: None.\nReturn: Integer (1 if the stream has ended, 0 otherwise).\nNotes: Useful for detecting end of playback."),
+    ("pspmp3.gettime()", "Purpose: Retrieves the current playback time of the MP3 file.\nParameters: None.\nReturn: String representing the time in HH:MM:SS format.\nNotes: Helps display current position in the song."),
+    ("pspmp3.freetune()", "Purpose: Frees up memory used by the MP3 file.\nParameters: None.\nReturn: None.\nNotes: Releases resources used by the MP3 file."),
+    ("pspmp3.end()", "Purpose: Stops playback and frees the resources used by the MP3 file.\nParameters: None.\nReturn: None.\nNotes: Stops playback and frees memory."),
+]
+
+# Function to display documentation
+def display_docs():
+    function_name, doc = functions[current_function]
+    osl.drawString(10, 10, "Function %d: %s" % (current_function + 1, function_name))
+    lines = doc.split('\n')
+    y_offset = 30
+    for line in lines:
+        osl.drawString(10, y_offset, line)
+        y_offset += 20
+
+# Function 1: Initialize the MP3 subsystem
+def test_init():
+    pspmp3.init(0)  # Using channel 0 for audio output
+    osl.drawString(10, 200, "MP3 subsystem initialized.")
+
+# Function 2: Load the MP3 file
+def test_load():
+    pspmp3.load("song.mp3")  # Assuming song.mp3 is in the same directory
+    osl.drawString(10, 200, "MP3 file loaded.")
+
+# Function 3: Play the MP3 file
+def test_play():
+    pspmp3.play(0)  # 0 means no looping
+    osl.drawString(10, 200, "MP3 playback started.")
+
+# Function 4: Pause or resume MP3 playback
+def test_pause():
+    pspmp3.pause()  # Pause or unpause
+    osl.drawString(10, 200, "MP3 playback paused or resumed.")
+
+# Function 5: Stop MP3 playback
+def test_stop():
+    pspmp3.stop()
+    osl.drawString(10, 200, "MP3 playback stopped.")
+
+# Function 6: Check if the MP3 has reached the end
+def test_endofstream():
+    result = pspmp3.endofstream()
+    if result == 1:
+        osl.drawString(10, 200, "MP3 stream has ended.")
+    else:
+        osl.drawString(10, 200, "MP3 stream is still playing.")
+
+# Function 7: Get the current MP3 playback time
+def test_gettime():
+    time = pspmp3.gettime()
+    osl.drawString(10, 200, "Playback Time: " + time)
+
+# Function 8: Free up resources used by the MP3 file
+def test_freetune():
+    pspmp3.freetune()
+    osl.drawString(10, 200, "MP3 resources freed.")
+
+# Function 9: Stop MP3 and free resources
+def test_end():
+    pspmp3.end()
+    osl.drawString(10, 200, "MP3 playback stopped and resources freed.")
+
+# List of test functions (for easy access)
+test_functions = [
+    test_init, test_load, test_play, test_pause, test_stop, test_endofstream,
+    test_gettime, test_freetune, test_end
+]
+
+# Main loop to keep the screen updated
+def main():
+    global current_function
+
+    while not osl.mustQuit():
+        osl.startDrawing()
+
+        # Clear the screen with black color
+        osl.clearScreen(osl.RGBA(0, 0, 0, 255))
+
+        # Display the documentation for the current function
+        display_docs()
+
+        # Draw instructions
+        osl.drawString(10, 330, "Use Left/Right to select function.")
+        osl.drawString(10, 350, "Press Cross to run the selected function.")
+
+        # Execute the selected function
+        test_functions[current_function]()
+
+        osl.endDrawing()
+
+        # Handle user input for selecting the function
+        ctrl = osl.Controller()
+        if ctrl.pressed_left:
+            current_function = (current_function - 1) % len(functions)  # Go left
+        elif ctrl.pressed_right:
+            current_function = (current_function + 1) % len(functions)  # Go right
+        elif ctrl.pressed_cross:
+            # Execute the selected function
+            test_functions[current_function]()
+
+        # Sync the frame to prevent the PSP from freezing
+        osl.syncFrame()
+
+# Start the program
+main()
+
+# Cleanup
+osl.endGfx()
+```
+
+### pspnet module test
+
+
+```
+# -*- coding: utf-8 -*-
+import pspnet
+import osl
+import os
+
+# Initialize graphics (16-bit, full-screen)
+osl.initGfx(osl.PF_5551, 1)
+
+# Global variables for function navigation
+current_function = 0  # The current function index (0-based)
+functions = [
+    ("pspnet.connectToAPCTL(config, callback, timeout)", "Purpose: Connects to an access point.\nParameters: config (int) - Configuration; callback (callable) - Function to be called on state change; timeout (int) - Time to wait before aborting.\nReturn: None.\nNotes: Connects to a network and monitors connection state."),
+    ("pspnet.getAPCTLState()", "Purpose: Retrieves the current APCTL state.\nParameters: None.\nReturn: Integer representing the APCTL state.\nNotes: Useful for monitoring the network connection status."),
+    ("pspnet.disconnectAPCTL()", "Purpose: Disconnects from the current AP.\nParameters: None.\nReturn: None.\nNotes: Disconnects from the current network."),
+    ("pspnet.getIP()", "Purpose: Retrieves the current IP address of the PSP.\nParameters: None.\nReturn: String representing the IP address.\nNotes: Use after successful connection to an AP."),
+    ("pspnet.getAPCTLSignalStrength()", "Purpose: Retrieves the signal strength of the connected AP.\nParameters: None.\nReturn: Integer representing the signal strength.\nNotes: Useful for monitoring network quality."),
+    ("pspnet.getAPCTLChannel()", "Purpose: Retrieves the channel of the connected AP.\nParameters: None.\nReturn: Integer representing the channel.\nNotes: Indicates the channel the AP is operating on."),
+    ("pspnet.wlanIsPowered()", "Purpose: Checks if the WLAN (Wi-Fi) is powered on.\nParameters: None.\nReturn: Integer (1 if powered on, 0 if powered off).\nNotes: Useful for checking if WLAN is enabled."),
+    ("pspnet.wlanEtherAddr()", "Purpose: Retrieves the MAC address of the PSP's WLAN.\nParameters: None.\nReturn: String representing the MAC address.\nNotes: Useful for network identification."),
+]
+
+# Function to display documentation
+def display_docs():
+    function_name, doc = functions[current_function]
+    osl.drawString(10, 10, "Function %d: %s" % (current_function + 1, function_name))
+    lines = doc.split('\n')
+    y_offset = 30
+    for line in lines:
+        osl.drawString(10, y_offset, line)
+        y_offset += 20
+
+# Function 1: Connect to an access point
+def test_connect():
+    def callback(state):
+        osl.drawString(10, 220, "Connection State: %d" % state)
+
+    try:
+        pspnet.connectToAPCTL(callback=callback, timeout=60)
+        osl.drawString(10, 200, "Attempting to connect to AP...")
+    except Exception, e:
+        osl.drawString(10, 200, "Connection Error: %s" % e)
+
+# Function 2: Get the current APCTL state
+def test_get_state():
+    state = pspnet.getAPCTLState()
+    osl.drawString(10, 200, "Current APCTL State: %d" % state)
+
+# Function 3: Disconnect from the AP
+def test_disconnect():
+    pspnet.disconnectAPCTL()
+    osl.drawString(10, 200, "Disconnected from AP.")
+
+# Function 4: Get the current IP address
+def test_get_ip():
+    try:
+        ip = pspnet.getIP()
+        osl.drawString(10, 200, "Current IP: %s" % ip)
+    except Exception, e:
+        osl.drawString(10, 200, "Error retrieving IP: %s" % e)
+
+# Function 5: Get signal strength
+def test_signal_strength():
+    try:
+        strength = pspnet.getAPCTLSignalStrength()
+        osl.drawString(10, 200, "Signal Strength: %d" % strength)
+    except Exception, e:
+        osl.drawString(10, 200, "Error retrieving signal strength: %s" % e)
+
+# Function 6: Get the current AP channel
+def test_getAPCTLChannel():
+    try:
+        channel = pspnet.getAPCTLChannel()
+        osl.drawString(10, 200, "AP Channel: %d" % channel)
+    except Exception, e:
+        osl.drawString(10, 200, "Error retrieving channel: %s" % e)
+
+# Function 7: Check if WLAN is powered on
+def test_wlan_status():
+    if pspnet.wlanIsPowered():
+        osl.drawString(10, 200, "WLAN is powered on.")
+    else:
+        osl.drawString(10, 200, "WLAN is powered off.")
+
+# Function 8: Get the WLAN MAC address
+def test_wlan_mac():
+    try:
+        mac = pspnet.wlanEtherAddr()
+        osl.drawString(10, 200, "WLAN MAC Address: %s" % mac)
+    except Exception, e:
+        osl.drawString(10, 200, "Error retrieving MAC address: %s" % e)
+
+# List of test functions (for easy access)
+test_functions = [
+    test_connect, test_get_state, test_disconnect, test_get_ip, test_signal_strength,
+    test_getAPCTLChannel, test_wlan_status, test_wlan_mac
+]
+
+# Main loop to keep the screen updated
+def main():
+    global current_function
+
+    while not osl.mustQuit():
+        osl.startDrawing()
+
+        # Clear the screen with black color
+        osl.clearScreen(osl.RGBA(0, 0, 0, 255))
+
+        # Display the documentation for the current function
+        display_docs()
+
+        # Draw instructions
+        osl.drawString(10, 330, "Use Left/Right to select function.")
+        osl.drawString(10, 350, "Press Cross to run the selected function.")
+
+        # Execute the selected function
+        test_functions[current_function]()
+
+        osl.endDrawing()
+
+        # Handle user input for selecting the function
+        ctrl = osl.Controller()
+        if ctrl.pressed_left:
+            current_function = (current_function - 1) % len(functions)  # Go left
+        elif ctrl.pressed_right:
+            current_function = (current_function + 1) % len(functions)  # Go right
+        elif ctrl.pressed_cross:
+            # Execute the selected function
+            test_functions[current_function]()
+
+        # Sync the frame to prevent the PSP from freezing
+        osl.syncFrame()
+
+# Start the program
+main()
+
+# Cleanup
+osl.endGfx()
+```
+
 ## Key differences from modern Python (3.x):
 
 The current build of PSP Python is version 2.5.2 from August 2009, and is based on Stackless 3.1b3 060516 (python-2.51:55047).
