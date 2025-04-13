@@ -1174,7 +1174,7 @@ osl.endGfx()
 
 ### Gfx demo
 
-![The Objects sample](img/objects.png)
+![The Objects sample](img/gfx_demo.png)
 
 ```
 import osl
