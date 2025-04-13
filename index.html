@@ -46,8 +46,23 @@
             transform: scale(1.05);
         }
 
-        .python-logo {
-            margin: 20px 0;
+        .row {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .row a {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            margin: 5px;
+            text-decoration: none;
+            color: #4a86e8;
+        }
+
+        .row-plain a {
+            background: none;
+            color: #fff;
         }
 
         footer {
@@ -71,17 +86,25 @@
         <h1>StacklessPython OSLib MOD</h1>
         <p>StacklessPython PSP modified to use OSLib MOD and supporting the Media Engine for MP3 playback.</p>
 
-        <div class="nav-links">
+        <!-- First Row: Non-Markdown Pages -->
+        <div class="row">
             <a href="osl.html">OSLib module</a>
             <a href="pspmp3.html">PSPMP3 module</a>
             <a href="pspnet.html">PSPNet module</a>
             <a href="pspos.html">PSPOS module</a>
+        </div>
 
-            <!-- New links to Markdown pages in mdpages directory -->
+        <!-- Second Row: Markdown Pages -->
+        <div class="row row-plain">
             <a href="mdpages/osl.html">OSLib module (md)</a>
             <a href="mdpages/pspmp3.html">PSPMP3 module (md)</a>
             <a href="mdpages/pspnet.html">PSPNet module (md)</a>
             <a href="mdpages/pspos.html">PSPOS module (md)</a>
+        </div>
+
+        <!-- Third Row: Demos Link -->
+        <div class="row row-plain">
+            <a href="mdpages/demos.html">Demos</a>
         </div>
 
         <footer>

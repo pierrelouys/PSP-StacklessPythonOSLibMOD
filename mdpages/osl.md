@@ -1,4 +1,6 @@
-# Python: built-in module osl
+# osl
+
+The documentation for this module is being reconstructed. The accuracy of this page cannot be guaranteed.
 
 ---
 
@@ -119,7 +121,7 @@
 
 #### Methods
 - **`__init__`(...):** x.<a href="#Font-__init__">`__init__`</a>(filename) Loads a font from a file.
-- **set**(...):** Sets this font as the current font.
+- **set**(...): Sets this font as the current font.
 
 #### Data and other attributes
 - **`__new__`** = `<built-in method __new__ of type object at 0x8ac9e5c>`
@@ -127,29 +129,45 @@
 
 ### [Image](#image)
 
+The image module provides PSP-specific image manipulation and rendering, leveraging the OSLib graphics library for hardware-accelerated operations.
+
 #### Methods
 - **`__init__`(...):** x.<a href="#Image-__init__">`__init__`</a> initializes the image from a file or creates an image.
-- **clear**(color):** Clears the image with a given color.
-- **convert**(...):** MISSING_DOC
-- **copy**(...):** Copies another image into this one.
-- **correctHalfBorder**(...):** Wraps oslCorrectImageHalfBorder().
-- **draw**(...):** Wraps oslDrawImage().
-- **getpixel**(...):** MISSING_DOC
-- **lock**(...):** oslLockImage()
-- **mirrorH**(...):** MISSING_DOC
-- **mirrorV**(...):** MISSING_DOC
-- **move**(...):** MISSING_DOC
-- **rotate**(...):** MISSING_DOC
-- **setFrame**(...):** MISSING_DOC
-- **setFrameSize**(...):** MISSING_DOC
-- **setRotationCenter**(...):** MISSING_DOC
-- **setpixel**(...):** MISSING_DOC
-- **swizzle**(dst):** oslSwizzleImage(dst, self)
-- **swizzleto**(...):** MISSING_DOC
-- **tile**(x0, y0, x1, y1):** oslCreateImageTile()
-- **uncache**(...):** Wraps oslUncacheImage().
-- **unlock**(...):** oslUnlockImage()
-- **write**(...):** Writes the image to a file.
+- **clear**(color): Clears the image with a given color.
+- **convert**(newLocation, newFormat): 
+    - Purpose: Converts an image to a new memory location and pixel format on the PSP.
+    - Parameters: 
+        - newLocation: Integer specifying memory location (e.g., osl.IN_RAM, osl.IN_VRAM).
+        - newFormat: Integer specifying pixel format (e.g., OSL_PF_8888, OSL_PF_5650).
+    - Returns: A new image object with the converted image, or raises an exception on failure.
+    - Notes:
+        - Use PSP-specific constants (e.g., osl.IN_VRAM) defined in the OSLib module.
+        - VRAM conversions optimize rendering performance.
+- **copy**(...): Copies another image into this one.
+- **correctHalfBorder**(...): Wraps oslCorrectImageHalfBorder().
+- **draw**(...): Wraps oslDrawImage().
+- **getpixel**(...): MISSING_DOC
+- **lock**(...): oslLockImage()
+- **mirrorH**(...): MISSING_DOC
+- **mirrorV**(...): MISSING_DOC
+- **move**(newLocation):
+    - Purpose: Moves an image to a different memory location (e.g., RAM to VRAM).
+    - Parameters:
+        - newLocation: Integer specifying target memory location (e.g., osl.IN_RAM, osl.IN_VRAM).
+    - Returns: None
+    - Notes:
+        - Useful for optimizing memory usage or rendering speed.
+- **rotate**(...): MISSING_DOC
+- **setFrame**(...): MISSING_DOC
+- **setFrameSize**(...): MISSING_DOC
+- **setRotationCenter**(...): MISSING_DOC
+- **setpixel**(...): MISSING_DOC
+- **swizzle**(dst): oslSwizzleImage(dst, self)
+- **swizzleto**(...): MISSING_DOC
+- **tile**(x0, y0, x1, y1): oslCreateImageTile()
+- **uncache**(...): Wraps oslUncacheImage().
+- **unlock**(...): oslUnlockImage()
+- **write**(...): Writes the image to a file.
 
 #### Data descriptors
 - **angle**
@@ -175,8 +193,8 @@
 
 #### Methods
 - **`__init__`(...):** x.<a href="#Map-__init__">`__init__`</a>(img, data, tileX, tileY) 'img' must be an instance of osl.Image.
-- **draw**(...):** Wraps oslDrawMap().
-- **drawSimple**(...):** Wraps oslDrawMapSimple().
+- **draw**(...): Wraps oslDrawMap().
+- **drawSimple**(...): Wraps oslDrawMapSimple().
 
 #### Data descriptors
 - **scrollX**
@@ -190,8 +208,8 @@
 
 #### Methods
 - **`__init__`(...):** x.<a href="#SFont-__init__">`__init__`</a>(...) initializes x.
-- **drawString**(...):** MISSING_DOC
-- **measureText**(...):** MISSING_DOC
+- **drawString**(...): MISSING_DOC
+- **measureText**(...): MISSING_DOC
 
 #### Data and other attributes
 - **`__new__`** = `<built-in method __new__ of type object at 0x8aca07c>`
@@ -201,11 +219,11 @@
 
 #### Methods
 - **`__init__`(...):** x.<a href="#Sound-__init__">`__init__`</a>(...) initializes x.
-- **getChannel**(...):** Returns the channel used for this sound.
-- **loop**(loop=1):** Sets looping on/off.
-- **pause**(pause=1):** Pauses the playback.
-- **play**(voice=0):** Plays the sound.
-- **stop**(...):** Stops playing.
+- **getChannel**(...): Returns the channel used for this sound.
+- **loop**(loop=1): Sets looping on/off.
+- **pause**(pause=1): Pauses the playback.
+- **play**(voice=0): Plays the sound.
+- **stop**(...): Stops playing.
 
 #### Data and other attributes
 - **`__new__`** = `<built-in method __new__ of type object at 0x8ac9990>`

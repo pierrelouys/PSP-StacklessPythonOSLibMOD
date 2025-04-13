@@ -1,4 +1,8 @@
-# Python: built-in module pspos
+# pspos
+
+The documentation for this module is being reconstructed. The accuracy of this page cannot be guaranteed.
+
+The os module provides PSP-specific system utilities, interfacing with the PSP’s hardware and file system.
 
 ---
 
@@ -52,23 +56,23 @@ This object may be accessed either as a tuple of (mode, ino, dev, nlink, uid, gi
 See `os.stat` for more information.
 
 #### Methods defined here:
-- **`__add__`(...):** x.<a href="#stat_result-__add__">`__add__`</a>(y) <==> x + y
-- **`__contains__`(...):** x.<a href="#stat_result-__contains__">`__contains__`</a>(y) <==> y in x
-- **`__eq__`(...):** x.<a href="#stat_result-__eq__">`__eq__`</a>(y) <==> x == y
-- **`__ge__`(...):** x.<a href="#stat_result-__ge__">`__ge__`</a>(y) <==> x >= y
-- **`__getitem__`(...):** x.<a href="#stat_result-__getitem__">`__getitem__`</a>(y) <==> x[y]
-- **`__getslice__`(...):** x.<a href="#stat_result-__getslice__">`__getslice__`</a>(i, j) <==> x[i:j]  
+- **`__add__`**(...): x.<a href="#stat_result-__add__">`__add__`</a>(y) <==> x + y
+- **`__contains__`**(...): x.<a href="#stat_result-__contains__">`__contains__`</a>(y) <==> y in x
+- **`__eq__`**(...): x.<a href="#stat_result-__eq__">`__eq__`</a>(y) <==> x == y
+- **`__ge__`**(...): x.<a href="#stat_result-__ge__">`__ge__`</a>(y) <==> x >= y
+- **`__getitem__`**(...): x.<a href="#stat_result-__getitem__">`__getitem__`</a>(y) <==> x[y]
+- **`__getslice__`**(...): x.<a href="#stat_result-__getslice__">`__getslice__`</a>(i, j) <==> x[i:j]  
   (Use of negative indices is not supported.)
-- **`__gt__`(...):** x.<a href="#stat_result-__gt__">`__gt__`</a>(y) <==> x > y
-- **`__hash__`(...):** x.<a href="#stat_result-__hash__">`__hash__`</a>() <==> hash(x)
-- **`__le__`(...):** x.<a href="#stat_result-__le__">`__le__`</a>(y) <==> x <= y
-- **`__len__`(...):** x.<a href="#stat_result-__len__">`__len__`</a>() <==> len(x)
-- **`__lt__`(...):** x.<a href="#stat_result-__lt__">`__lt__`</a>(y) <==> x < y
-- **`__mul__`(...):** x.<a href="#stat_result-__mul__">`__mul__`</a>(n) <==> x * n
-- **`__ne__`(...):** x.<a href="#stat_result-__ne__">`__ne__`</a>(y) <==> x != y
-- **`__reduce__`(...):** MISSING_DOC
-- **`__repr__`(...):** x.<a href="#stat_result-__repr__">`__repr__`</a>() <==> repr(x)
-- **`__rmul__`(...):** x.<a href="#stat_result-__rmul__">`__rmul__`</a>(n) <==> n * x
+- **`__gt__`**(...): x.<a href="#stat_result-__gt__">`__gt__`</a>(y) <==> x > y
+- **`__hash__`**(...): x.<a href="#stat_result-__hash__">`__hash__`</a>() <==> hash(x)
+- **`__le__`**(...): x.<a href="#stat_result-__le__">`__le__`</a>(y) <==> x <= y
+- **`__len__`**(...): x.<a href="#stat_result-__len__">`__len__`</a>() <==> len(x)
+- **`__lt__`**(...): x.<a href="#stat_result-__lt__">`__lt__`</a>(y) <==> x < y
+- **`__mul__`**(...): x.<a href="#stat_result-__mul__">`__mul__`</a>(n) <==> x * n
+- **`__ne__`**(...): x.<a href="#stat_result-__ne__">`__ne__`</a>(y) <==> x != y
+- **`__reduce__`**(...): MISSING_DOC
+- **`__repr__`**(...): x.<a href="#stat_result-__repr__">`__repr__`</a>() <==> repr(x)
+- **`__rmul__`**(...): x.<a href="#stat_result-__rmul__">`__rmul__`</a>(n) <==> n * x
 
 #### Data descriptors defined here:
 - **`st_atime`**: time of last access
@@ -94,11 +98,11 @@ See `os.stat` for more information.
 ## Functions
 
 ### [access](#access)
-**`access`(...):**  
+**`access`**(...):  
 MISSING_DOC
 
 ### [battery](#battery)
-**`battery`(...):**  
+**`battery`**(...):  
 Returns a tuple (plugged, present, charging, lifep, lifet, temp, volt).  
 - **plugged**: 1 if the PSP is plugged in, 0 else.
 - **present**: 1 if the battery is present, 0 else.
@@ -109,131 +113,133 @@ Returns a tuple (plugged, present, charging, lifep, lifet, temp, volt).
 - **volt**: battery voltage (millivolts).
 
 ### [chdir](#chdir)
-**`chdir`(...):**  
+**`chdir`**(...):  
 MISSING_DOC
 
 ### [chmod](#chmod)
-**`chmod`(...):**  
+**`chmod`**(...):  
 MISSING_DOC
 
 ### [close](#close)
-**`close`(...):**  
+**`close`**(...):  
 MISSING_DOC
 
 ### [delenv](#delenv)
-**`delenv`(...):**  
+**`delenv`**(...):  
 MISSING_DOC
 
 ### [fdopen](#fdopen)
-**`fdopen`(...):**  
+**`fdopen`**(...):  
 MISSING_DOC
 
 ### [freemem](#freemem)
-**`freemem`(...):**  
+**`freemem`**(...):  
 Returns the total free memory, in bytes. Note: this doesn't seem to work very well, see 'realmem' instead.
 
 ### [freemsspace](#freemsspace)
-**`freemsspace`(...):**  
-MISSING_DOC
+**`freemsspace`**():  
+- Purpose: Returns the free space (in bytes) on the PSP’s memory stick (ms0:).
+- Parameters: None
+- Returns: A float representing the free space in bytes.
 
 ### [getbus](#getbus)
-**`getbus`(...):**  
+**`getbus`**(...):  
 Returns the bus speed in MHz.
 
 ### [getclock](#getclock)
-**`getclock`(...):**  
+**`getclock`**(...):  
 Returns the CPU clock speed in MHz.
 
 ### [getclocks](#getclocks)
-**`getclocks`(...):**  
+**`getclocks`**(...):  
 MISSING_DOC
 
 ### [getcwd](#getcwd)
-**`getcwd`(...):**  
+**`getcwd`**(...):  
 MISSING_DOC
 
 ### [getenv](#getenv)
-**`getenv`(...):**  
+**`getenv`**(...):  
 MISSING_DOC
 
 ### [getenvdict](#getenvdict)
-**`getenvdict`(...):**  
+**`getenvdict`**(...):  
 MISSING_DOC
 
 ### [getnickname](#getnickname)
-**`getnickname`(...):**  
+**`getnickname`**(...):  
 MISSING_DOC
 
 ### [getsystemparam](#getsystemparam)
-**`getsystemparam`(...):**  
+**`getsystemparam`**(...):  
 MISSING_DOC
 
 ### [listdir](#listdir)
-**`listdir`(...):**  
+**`listdir`**(...):  
 MISSING_DOC
 
 ### [lstat](#lstat)
-**`lstat`(...):**  
+**`lstat`**(...):  
 MISSING_DOC
 
 ### [mkdir](#mkdir)
-**`mkdir`(...):**  
+**`mkdir`**(...):  
 MISSING_DOC
 
 ### [open](#open)
-**`open`(...):**  
+**`open`**(...):  
 MISSING_DOC
 
 ### [powertick](#powertick)
-**`powertick`(...):**  
+**`powertick`**(...):  
 Generates a power tick to prevent the PSP from going idle.
 
 ### [putenv](#putenv)
-**`putenv`(...):**  
+**`putenv`**(...):  
 MISSING_DOC
 
 ### [realmem](#realmem)
-**`realmem`(...):**  
+**`realmem`**(...):  
 Returns the actual free memory. Takes an optional parameter 'size'. This function works by allocating blocks of 'size' bytes until malloc() returns NULL, then freeing all the blocks. 'size' is 4096 by default.
 
 ### [remove](#remove)
-**`remove`(...):**  
+**`remove`**(...):  
 MISSING_DOC
 
 ### [rename](#rename)
-**`rename`(...):**  
+**`rename`**(...):  
 MISSING_DOC
 
 ### [rmdir](#rmdir)
-**`rmdir`(...):**  
+**`rmdir`**(...):  
 MISSING_DOC
 
 ### [setbus](#setbus)
-**`setbus`(...):**  
+**`setbus`**(...):  
 Sets the bus speed. Valid values are 1 to 167; an OSError is raised for other values.
 
 ### [setclock](#setclock)
-**`setclock`(...):**  
+**`setclock`**(...):  
 Sets the CPU clock speed. Valid values are 1 to 333; an OSError is raised for other values.
 
 ### [setclocks](#setclocks)
-**`setclocks`(...):**  
+**`setclocks`**(...):  
 MISSING_DOC
 
 ### [stat](#stat)
-**`stat`(...):**  
+**`stat`**(...):  
 MISSING_DOC
 
 ### [system](#system)
-**`system`(...):**  
+**`system`**(...):  
 MISSING_DOC
 
 ### [unlink](#unlink)
-**`unlink`(...):**  
+**`unlink`**(...):  
 MISSING_DOC
 
 ### [utime](#utime)
-**`utime`(...):**  
+**`utime`**(...):  
 MISSING_DOC
 
 ---

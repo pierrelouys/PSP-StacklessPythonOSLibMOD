@@ -1,4 +1,6 @@
-# Python: built-in module pspmp3
+# pspmp3
+
+The documentation for this module is being reconstructed. The accuracy of this page cannot be guaranteed.
 
 ---
 
