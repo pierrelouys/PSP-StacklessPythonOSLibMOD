@@ -1100,6 +1100,244 @@ main()
 osl.endGfx()
 ```
 
+### Button tester
+
+```
+import osl
+
+screen_width = 480
+screen_height = 272
+
+# Colors (assuming osl supports RGB color definitions)
+black = osl.RGB(0, 0, 0)
+white = osl.RGB(255, 255, 255)
+yellow = osl.RGB(255, 255, 0)
+
+def main():
+    # Initialize the graphics system
+    osl.initGfx()
+
+    while not osl.mustQuit():
+        osl.startDrawing()
+
+        # Clear the screen with black
+        osl.clearScreen(black)
+
+        # Create a controller object to read input
+        ctrl = osl.Controller()
+
+        # Y-coordinate for stacking messages
+        y_pos = 10
+
+        # List of buttons to check
+        buttons = [
+            "select", "start", "up", "right", "down", "left",
+            "L", "R", "triangle", "circle", "cross", "square",
+            "home", "hold", "note"
+        ]
+
+        # Check held and pressed states for each button
+        for button in buttons:
+            # Access attributes dynamically
+            held_attr = getattr(ctrl, "held_" + button)
+            pressed_attr = getattr(ctrl, "pressed_" + button)
+
+            if held_attr:
+                osl.drawString(10, y_pos, "%s held down!" % button.capitalize())
+                y_pos = y_pos + 20
+            if pressed_attr:
+                osl.drawString(10, y_pos, "%s pressed!" % button.capitalize())
+                y_pos = y_pos + 20
+
+        # Display analog stick positions
+        osl.drawString(10, y_pos, "Analog X: %d" % ctrl.analogX)
+        y_pos = y_pos + 20
+        osl.drawString(10, y_pos, "Analog Y: %d" % ctrl.analogY)
+        y_pos = y_pos + 20
+
+        # Display instructions
+        osl.drawString(10, screen_height - 30, "Press Home to quit")
+
+        # Handle quit on pressing Home button
+        if ctrl.pressed_home:
+            osl.safeQuit()
+
+        osl.endDrawing()
+        osl.syncFrame()
+
+# Start the program
+main()
+
+# Cleanup
+osl.endGfx()
+```
+
+### Gfx demo
+
+![The Objects sample](img/objects.png)
+
+```
+import osl
+import math
+import time
+
+# Initialize graphics (16-bit, full-screen)
+osl.initGfx(osl.PF_5551, 1)
+
+# Constants for graphical elements
+screen_width = 480
+screen_height = 272
+
+# Colors
+white = osl.RGBA(255, 255, 255, 255)
+blue = osl.RGBA(0, 0, 255, 255)
+red = osl.RGBA(255, 0, 0, 255)
+green = osl.RGBA(0, 255, 0, 255)
+black = osl.RGBA(0, 0, 0, 255)
+yellow = osl.RGBA(255, 255, 0, 255)
+
+# Initial sphere position and speed
+sphere_x = screen_width / 2
+sphere_y = screen_height / 2
+sphere_radius = 30
+sphere_speed_x = 0
+sphere_speed_y = 0
+
+# Function to draw a sphere (approximated with many small circles)
+def draw_sphere(x, y, radius, color):
+    num_segments = 12  # Approximate the sphere with smaller segments
+    angle_step = 360 / num_segments
+    for i in range(num_segments):
+        angle = math.radians(i * angle_step)
+        dx = radius * math.cos(angle)
+        dy = radius * math.sin(angle)
+        osl.drawFillRect(int(x + dx), int(y + dy), int(x + dx + 2), int(y + dy + 2), color)
+
+# Function to create a moving background (like stars or dots)
+def draw_moving_dots():
+    num_dots = 50
+    for i in range(num_dots):
+        x = (time.time() * 1000 + i * 50) % screen_width
+        y = (i * 15) % screen_height
+        osl.drawFillRect(int(x), int(y), int(x + 2), int(y + 2), osl.RGBA(255, 255, 255, 100))
+
+# Function to draw gradient background
+def draw_gradient_background():
+    for y in range(0, screen_height, 5):
+        color = osl.RGBA(int((y / screen_height) * 255), 0, int((1 - y / screen_height) * 255), 255)
+        osl.drawLine(0, y, screen_width, y, color)
+
+# Function to handle user input and move the sphere
+def move_sphere():
+    global sphere_x, sphere_y, sphere_speed_x, sphere_speed_y
+    ctrl = osl.Controller()
+
+    # Move sphere with the D-pad or analog stick
+    if ctrl.held_left:
+        sphere_speed_x = -5
+    elif ctrl.held_right:
+        sphere_speed_x = 5
+    else:
+        sphere_speed_x = 0
+
+    if ctrl.held_up:
+        sphere_speed_y = -5
+    elif ctrl.held_down:
+        sphere_speed_y = 5
+    else:
+        sphere_speed_y = 0
+
+    # Update sphere position
+    sphere_x += sphere_speed_x
+    sphere_y += sphere_speed_y
+
+    # Keep the sphere inside the screen
+    if sphere_x - sphere_radius < 0:
+        sphere_x = sphere_radius
+    elif sphere_x + sphere_radius > screen_width:
+        sphere_x = screen_width - sphere_radius
+
+    if sphere_y - sphere_radius < 0:
+        sphere_y = sphere_radius
+    elif sphere_y + sphere_radius > screen_height:
+        sphere_y = screen_height - sphere_radius
+
+# Function to draw rotating rectangle
+def draw_rotating_rect(center_x, center_y, width, height, angle, color):
+    half_width = width / 2
+    half_height = height / 2
+    cos_angle = math.cos(math.radians(angle))
+    sin_angle = math.sin(math.radians(angle))
+
+    # Define the corners relative to the center
+    corners = [
+        (-half_width, -half_height),
+        (half_width, -half_height),
+        (half_width, half_height),
+        (-half_width, half_height)
+    ]
+
+    # Rotate and translate corners
+    rotated_corners = []
+    for x, y in corners:
+        x_rot = cos_angle * x - sin_angle * y + center_x
+        y_rot = sin_angle * x + cos_angle * y + center_y
+        rotated_corners.append((x_rot, y_rot))
+
+    # Draw the rectangle using the rotated corners
+    for i in range(4):
+        x1, y1 = rotated_corners[i]
+        x2, y2 = rotated_corners[(i + 1) % 4]
+        osl.drawLine(int(x1), int(y1), int(x2), int(y2), color)
+
+# Main loop
+def main():
+    angle = 0
+    while not osl.mustQuit():
+        osl.startDrawing()
+
+        # Clear the screen with black
+        osl.clearScreen(black)
+
+        # Draw gradient background
+        draw_gradient_background()
+
+        # Draw moving dots (stars or particles)
+        draw_moving_dots()
+
+        # Draw rotating rectangle in the center
+        draw_rotating_rect(screen_width / 2, screen_height / 2, 200, 100, angle, yellow)
+
+        # Draw the sphere with user interactivity
+        draw_sphere(sphere_x, sphere_y, sphere_radius, red)
+
+        # Handle user input and update sphere movement
+        move_sphere()
+
+        # Increment rotation angle for the rectangle
+        angle += 2
+
+        # Draw instructions on the screen
+        osl.drawString(10, 10, "Use D-Pad/Analog to move the red sphere")
+
+        # Sync frame to ensure smooth animation
+        osl.syncFrame()
+
+        # Handle quit on pressing Home button
+        ctrl = osl.Controller()
+        if ctrl.pressed_home:
+            osl.safeQuit()
+
+        osl.endDrawing()
+
+# Start the program
+main()
+
+# Cleanup
+osl.endGfx()
+```
+
+
 ## Key differences from modern Python (3.x):
 
 The current build of PSP Python is version 2.5.2 from August 2009, and is based on Stackless 3.1b3 060516 (python-2.51:55047).
