@@ -5,9 +5,7 @@ The documentation for this module is being reconstructed. The accuracy of this p
 ---
 
 ## Table of Contents
-1. [Classes](#classes)
-   - [Error](#error)
-2. [Functions](#functions)
+1. [Functions](#functions)
    - [connectToAPCTL](#connecttoapctl)
    - [disconnectAPCTL](#disconnectapctl)
    - [enumConfigs](#enumconfigs)
@@ -18,45 +16,7 @@ The documentation for this module is being reconstructed. The accuracy of this p
    - [wlanEtherAddr](#wlanetheraddr)
    - [wlanIsPowered](#wlanispowered)
    - [wlanSwitchState](#wlanswitchstate)
-3. [Data](#data)
-
----
-
-## Classes
-
-### [Error](#error)
-#### Method resolution order:
-- [Error](#Error)
-- [exceptions.Exception](#Exception)
-- [exceptions.BaseException](#BaseException)
-- [__builtin__.object](#__builtin__.object)
-
-#### Data descriptors defined here:
-- **`__weakref__`**: list of weak references to the object (if defined)
-
-#### Methods inherited from [exceptions.Exception](#Exception):
-- **`__init__`**(...): x.<a href="#Error-__init__">`__init__`</a>(...) initializes x; see x.__class__.__doc__ for signature
-
-#### Data and other attributes inherited from [exceptions.Exception](#Exception):
-- **`__new__`** = `<built-in method __new__ of type object at 0x8abb148>`
-  - T.<a href="#Error-__new__">`__new__`</a>(S, ...) → a new object with type S, a subtype of T
-
-#### Methods inherited from [exceptions.BaseException](#BaseException):
-- **`__delattr__`**(...): x.<a href="#Error-__delattr__">`__delattr__`</a>('name') <==> del x.name
-- **`__getattribute__`**(...): x.<a href="#Error-__getattribute__">`__getattribute__`</a>('name') <==> x.name
-- **`__getitem__`**(...): x.<a href="#Error-__getitem__">`__getitem__`</a>(y) <==> x[y]
-- **`__getslice__`**(...): x.<a href="#Error-__getslice__">`__getslice__`</a>(i, j) <==> x[i:j]  
-  (Use of negative indices is not supported.)
-- **`__reduce__`**(...): MISSING_DOC
-- **`__repr__`**(...): x.<a href="#Error-__repr__">`__repr__`</a>() <==> repr(x)
-- **`__setattr__`**(...): x.<a href="#Error-__setattr__">`__setattr__`</a>('name', value) <==> x.name = value
-- **`__setstate__`**(...): MISSING_DOC
-- **`__str__`**(...): x.<a href="#Error-__str__">`__str__`</a>() <==> str(x)
-
-#### Data descriptors inherited from [exceptions.BaseException](#BaseException):
-- **`__dict__`**
-- **`args`**
-- **`message`**: exception message
+2. [Data](#data)
 
 ---
 

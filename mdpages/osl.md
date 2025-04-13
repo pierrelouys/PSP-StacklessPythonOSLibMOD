@@ -82,44 +82,6 @@ Most of the methods listed below wrap OSLib Mod functions, so it can be helpful 
 - **released_triangle**
 - **released_up**
 
-#### Data and other attributes
-- **__new__** = `<built-in method __new__ of type object at 0x8ac9380>`
----
-
-### [Error](#error)
-
-#### Method resolution order:
-- [Error](#Error)
-- [exceptions.Exception](#Exception)
-- [exceptions.BaseException](#BaseException)
-- [__builtin__.object](#__builtin__.object)
-
-#### Data descriptors
-- **__weakref__**: list of weak references to the object (if defined)
-
-#### Methods inherited from [exceptions.Exception](#Exception):
-- **__init__(...):** x.<a href="#Error-__init__">`__init__`</a>(...) initializes x; see x.__class__.__doc__ for signature
-
-#### Data and other attributes inherited from [exceptions.Exception](#Exception):
-- **__new__** = `<built-in method __new__ of type object at 0x8abb148>`
-
-#### Methods inherited from [exceptions.BaseException](#BaseException):
-- **__delattr__(...):** x.<a href="#Error-__delattr__">`__delattr__`</a>('name') <==> del x.name
-- **__getattribute__(...):** x.<a href="#Error-__getattribute__">`__getattribute__`</a>('name') <==> x.name
-- **__getitem__(...):** x.<a href="#Error-__getitem__">`__getitem__`</a>(y) <==> x[y]
-- **__getslice__(...):** x.<a href="#Error-__getslice__">`__getslice__`</a>(i, j) <==> x[i:j]  
-  (Use of negative indices is not supported.)
-- **__reduce__(...):** MISSING_DOC
-- **__repr__(...):** x.<a href="#Error-__repr__">`__repr__`</a>() <==> repr(x)
-- **__setattr__(...):** x.<a href="#Error-__setattr__">`__setattr__`</a>('name', value) <==> x.name = value
-- **__setstate__(...):** MISSING_DOC
-- **__str__(...):** x.<a href="#Error-__str__">`__str__`</a>() <==> str(x)
-
-#### Data descriptors inherited from [exceptions.BaseException](#BaseException):
-- **__dict__**
-- **`args`**
-- **`message`**: exception message
-
 ---
 
 ### [Font](#font)
@@ -134,8 +96,6 @@ Most of the methods listed below wrap OSLib Mod functions, so it can be helpful 
     - Description: Sets the loaded font as the active font for rendering text.
     - Notes: wraps oslSetFont().
 
-#### Data and other attributes
-- **__new__** = `<built-in method __new__ of type object at 0x8ac9e5c>`
 ---
 
 ### [Image](#image)
@@ -262,8 +222,6 @@ Most of the methods listed below wrap OSLib Mod functions, so it can be helpful 
 - **x**: Gets or sets the x-coordinate of the image’s position.
 - **y**: Gets or sets the y-coordinate of the image’s position.
 
-#### Data and other attributes
-- **__new__** = `<built-in method __new__ of type object at 0x8ac8ef4>`
 ---
 
 ### [Map](#map)
@@ -289,8 +247,6 @@ Most of the methods listed below wrap OSLib Mod functions, so it can be helpful 
 - **scrollX**
 - **scrollY**
 
-#### Data and other attributes
-- **__new__** = `<built-in method __new__ of type object at 0x8ac9bf0>`
 ---
 
 ### [SFont](#sfont)
@@ -317,8 +273,6 @@ Most of the methods listed below wrap OSLib Mod functions, so it can be helpful 
     - Returns: The width of the text in pixels (integer).
     - Notes: wraps oslGetSFontTextWidth().
 
-#### Data and other attributes
-- **__new__** = `<built-in method __new__ of type object at 0x8aca07c>`
 ---
 
 ### [Sound](#sound)
@@ -347,8 +301,6 @@ Most of the methods listed below wrap OSLib Mod functions, so it can be helpful 
 - **stop**():
     - Description: Stops the currently playing sound.
 
-#### Data and other attributes
-- **__new__** = `<built-in method __new__ of type object at 0x8ac9990>`
 ---
 
 ## Functions
