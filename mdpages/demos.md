@@ -534,7 +534,297 @@ while not osl.mustQuit():
 osl.endGfx()
 ```
 
-### Key differences from modern Python (3.x):
+### os module test
+
+```
+# -*- coding: utf-8 -*-
+import osl
+import os
+
+# Initialize graphics (16-bit, full-screen)
+osl.initGfx(osl.PF_5551, 1)
+
+# Global variables for function navigation
+current_function = 0  # The current function index (0-based)
+functions = [
+    ("os.getcwd()", "Purpose: Returns the current working directory.\nParameters: None.\nReturn: String representing the current working directory.\nNotes: None."),
+    ("os.mkdir(dir_name)", "Purpose: Creates a new directory with the given name.\nParameters: dir_name (str) - The name of the directory to create.\nReturn: None.\nNotes: Raises OSError if the directory already exists."),
+    ("os.rmdir(dir_name)", "Purpose: Removes an empty directory.\nParameters: dir_name (str) - The directory to remove.\nReturn: None.\nNotes: Raises OSError if the directory is not empty or does not exist."),
+    ("os.battery()", "Purpose: Retrieves the battery status of the PSP.\nParameters: None.\nReturn: A tuple containing plugged (int), present (int), charging (int), life percent (int), life time (int), temperature (int), and voltage (int).\nNotes: Useful for checking battery health."),
+    ("os.freemem()", "Purpose: Returns the amount of free memory available on the PSP.\nParameters: None.\nReturn: Integer value representing free memory in bytes.\nNotes: Useful for memory management."),
+    ("os.system(cmd)", "Purpose: Executes a system command.\nParameters: cmd (str) - The command to execute.\nReturn: Integer (Exit status of the command).\nNotes: Limited functionality depending on the PSP's OS."),
+    ("os.access(path, mode)", "Purpose: Checks if a file exists and if the current user has the given permissions.\nParameters: path (str) - Path to the file; mode (int) - Permissions mode.\nReturn: Boolean (True if the file exists and has the required permissions).\nNotes: Raises OSError if the file does not exist or has insufficient permissions."),
+    ("os.rename(src, dst)", "Purpose: Renames a file.\nParameters: src (str) - Source file path; dst (str) - Destination file path.\nReturn: None.\nNotes: Raises OSError if the source file does not exist or the rename fails."),
+    ("os.unlink(path)", "Purpose: Deletes a file.\nParameters: path (str) - Path to the file.\nReturn: None.\nNotes: Raises OSError if the file does not exist or the delete operation fails."),
+    ("os.remove(path)", "Purpose: Removes a file.\nParameters: path (str) - The file to remove.\nReturn: None.\nNotes: Raises OSError if the file cannot be removed."),
+    ("os.chmod(path, mode)", "Purpose: Changes the permissions of a file.\nParameters: path (str) - File path; mode (int) - Permission mode.\nReturn: None.\nNotes: Raises OSError if the file does not exist or permissions cannot be changed."),
+    ("os.stat(path)", "Purpose: Retrieves file status information.\nParameters: path (str) - File or directory path.\nReturn: tuple with information like size, permissions.\nNotes: Raises OSError if file does not exist."),
+    ("os.system(cmd)", "Purpose: Executes system commands.\nParameters: cmd (str) - Command to run.\nReturn: integer (exit status).\nNotes: Useful for running PSP shell commands."),
+    ("os.getenv(name)", "Purpose: Retrieves environment variable.\nParameters: name (str) - Variable name.\nReturn: String value of the environment variable.\nNotes: Returns None if the variable doesn't exist."),
+    ("os.putenv(name, value)", "Purpose: Sets environment variable.\nParameters: name (str) - Variable name; value (str) - Value to set.\nReturn: None.\nNotes: Doesn't persist between reboots."),
+    ("os.delenv(name)", "Purpose: Deletes environment variable.\nParameters: name (str) - Variable name.\nReturn: None.\nNotes: Doesn't persist between reboots."),
+    ("os.listdir(path)", "Purpose: Lists contents of a directory.\nParameters: path (str) - Directory path.\nReturn: list of file names.\nNotes: Returns empty list if directory is empty."),
+    ("os.setclocks(cpufreq, busfreq)", "Purpose: Sets the CPU and bus frequencies of the PSP.\nParameters: cpufreq (int) - Desired CPU frequency in MHz (1-333 MHz).\nParameters: busfreq (int) - Desired bus frequency in MHz (1-167 MHz).\nReturn: None.\nNotes: Use this to adjust performance for better efficiency or speed."),
+    ("os.getclocks()", "Purpose: Retrieves the current CPU and bus frequencies.\nParameters: None.\nReturn: tuple containing (cpu_freq, bus_freq).\nNotes: Useful for checking or adjusting PSP system performance."),
+    ("os.getclock()", "Purpose: Retrieves the current CPU frequency.\nParameters: None.\nReturn: The current CPU frequency (int, in MHz).\nNotes: Helps monitor CPU speed in real-time."),
+    ("os.setclock(cpufreq)", "Purpose: Sets the CPU frequency of the PSP.\nParameters: cpufreq (int) - Desired CPU frequency in MHz (1-333 MHz).\nReturn: None.\nNotes: Use to optimize for power or performance."),
+    ("os.setbus(busfreq)", "Purpose: Sets the bus frequency of the PSP.\nParameters: busfreq (int) - Desired bus frequency in MHz (1-167 MHz).\nReturn: None.\nNotes: Adjusts the bus speed for power/performance balance."),
+    ("os.getbus()", "Purpose: Retrieves the current bus frequency.\nParameters: None.\nReturn: Current bus frequency (int, in MHz).\nNotes: For system performance monitoring."),
+    ("os.powertick()", "Purpose: Updates the PSP's power management system.\nParameters: None.\nReturn: None.\nNotes: Helps manage the PSP's power state."),
+    ("os.getsystemparam(id)", "Purpose: Retrieves a system parameter from the PSP.\nParameters: id (int) - The system parameter identifier.\nReturn: A string or integer value representing the system parameter.\nNotes: Useful for obtaining device-specific information such as nickname or language."),
+    ("os.getnickname()", "Purpose: Retrieves the PSP's nickname.\nParameters: None.\nReturn: The nickname of the PSP (string).\nNotes: Can be used to identify a specific PSP."),
+    ("os.freemsspace()", "Purpose: Returns the free space on the Memory Stick.\nParameters: None.\nReturn: The amount of free space in bytes (float).\nNotes: Useful for managing storage on the PSP."),
+    ("os.realmem(size)", "Purpose: Allocates memory blocks for testing or simulation.\nParameters: size (int) - The size of the memory blocks (default is 4096 bytes).\nReturn: The total allocated memory in bytes (integer).\nNotes: Helps in testing memory allocation on the PSP."),
+]
+
+# Function to display documentation
+def display_docs():
+    function_name, doc = functions[current_function]
+    osl.drawString(10, 10, "Function %d: %s" % (current_function + 1, function_name))
+    lines = doc.split('\n')
+    y_offset = 30
+    for line in lines:
+        osl.drawString(10, y_offset, line)
+        y_offset += 20
+
+# Function 1: Get current working directory
+def test_getcwd():
+    cwd = os.getcwd()
+    osl.drawString(10, 200, "Current Directory: " + cwd)
+
+# Function 2a: Create a directory
+def test_mkdir():
+    dir_name = "test_dir"
+    try:
+        os.mkdir(dir_name)
+        osl.drawString(10, 200, "Directory created: " + dir_name)
+    except OSError, e:
+        osl.drawString(10, 200, "Failed to create directory: " + str(e))
+
+# Function 2b: Create and remove a directory
+def test_rmdir():
+    dir_name = "test_dir"
+    try:
+        os.rmdir(dir_name)
+        osl.drawString(10, 220, "Directory removed: " + dir_name)
+    except OSError, e:
+        osl.drawString(10, 220, "Failed to remove directory: " + str(e))
+
+# Function 3: Get battery status
+def test_battery():
+    plugged, present, charging, lifep, lifet, temp, volt = os.battery()
+    osl.drawString(10, 200, "Battery plugged: " + str(plugged))
+    osl.drawString(10, 220, "Battery present: " + str(present))
+    osl.drawString(10, 240, "Charging: " + str(charging))
+    osl.drawString(10, 260, "Life percent: " + str(lifep) + "%")
+    osl.drawString(10, 280, "Life time: " + str(lifet) + " min")
+    osl.drawString(10, 300, "Temperature: " + str(temp) + "°C")
+    osl.drawString(10, 320, "Voltage: " + str(volt) + "mV")
+
+# Function 4: Check free memory
+def test_freemem():
+    free_mem = os.freemem()
+    osl.drawString(10, 200, "Free Memory: " + str(free_mem) + " bytes")
+
+# Function 5: System call example
+def test_system_call():
+    result = os.system("echo Test PSP system call")
+    osl.drawString(10, 200, "System call result: " + str(result))
+
+# Function 6: os.access example
+def test_access():
+    path = "test_file.txt"
+    f = open(path, 'w')
+    f.write("Hello")
+    f.close()
+    result = os.access(path, 0)
+    osl.drawString(10, 200, "File exists: %s" % str(result))
+
+# Function 7: os.rename example
+def test_rename():
+    old_name = "old_test.txt"
+    new_name = "new_test.txt"
+    
+    # Create and write to the file (compatible with Python 2.5)
+    f = open(old_name, 'w')
+    f.write("Hello")
+    f.close()
+    
+    # Check if the target file already exists, and remove it if so
+    if os.path.exists(new_name):
+        os.remove(new_name)  # Remove the file if it already exists
+    
+    # Rename the file
+    os.rename(old_name, new_name)
+    
+    # Display the result
+    osl.drawString(10, 200, "Renamed file to %s" % new_name)
+
+
+# Function 8: os.unlink example
+def test_unlink():
+    file_name = "test_to_delete.txt"
+    f = open(file_name, 'w')
+    f.write("Hello")
+    f.close()
+    os.unlink(file_name)
+    osl.drawString(10, 200, "File %s deleted." % file_name)
+
+# Function 11: os.remove example
+def test_remove():
+    file_name = "remove_test.txt"
+    f = open(file_name, 'w')
+    f.write("Hello")
+    f.close()
+    os.remove(file_name)
+    osl.drawString(10, 200, "File %s removed." % file_name)
+
+# Function 12: os.chmod example
+def test_chmod():
+    file_name = "chmod_test.txt"
+    f = open(file_name, 'w')
+    f.write("Hello")
+    f.close()
+    os.chmod(file_name, 0777)
+    osl.drawString(10, 200, "Permissions for %s changed." % file_name)
+
+# Function 13: os.stat example
+def test_stat():
+    path = "test_file_stat.txt"
+    f = open(path, 'w')
+    f.write("Hello")
+    f.close()
+    file_stat = os.stat(path)
+    osl.drawString(10, 200, "File size: %d" % file_stat.st_size)
+
+# Function 19: os.system example
+def test_system_command():
+    result = os.system("echo Hello from PSP")
+    osl.drawString(10, 200, "System command result: %d" % result)
+
+# Function 20: os.getenv example
+def test_getenv():
+    result = os.getenv("HOME")
+    osl.drawString(10, 200, "HOME: %s" % result)
+
+# Function 21: os.putenv example
+def test_putenv():
+    os.putenv("TEST_VAR", "123")
+    result = os.getenv("TEST_VAR")
+    osl.drawString(10, 200, "TEST_VAR: %s" % result)
+
+# Function 22: os.delenv example
+def test_delenv():
+    os.putenv("DELETE_VAR", "test")
+    os.delenv("DELETE_VAR")
+    result = os.getenv("DELETE_VAR")
+    osl.drawString(10, 200, "DELETE_VAR: %s" % result)
+
+# Function 23: os.listdir example
+def test_listdir():
+    dir_name = "test_dir_list"
+    os.mkdir(dir_name)
+    os.system("echo Hello > %s/file.txt" % dir_name)
+    files = os.listdir(dir_name)
+    osl.drawString(10, 200, "Files in %s: %s" % (dir_name, str(files)))
+
+def test_setclocks():
+    os.setclocks(222, 111)
+    osl.drawString(10, 200, "CPU and Bus frequencies set.")
+
+def test_getclocks():
+    cpu, bus = os.getclocks()
+    osl.drawString(10, 200, "CPU: %d MHz, Bus: %d MHz" % (cpu, bus))
+
+def test_getclock():
+    cpu = os.getclock()
+    osl.drawString(10, 200, "Current CPU frequency: %d MHz" % cpu)
+
+def test_setclock():
+    os.setclock(222)
+    osl.drawString(10, 200, "CPU frequency set.")
+
+def test_setbus():
+    os.setbus(111)
+    osl.drawString(10, 200, "Bus frequency set.")
+
+def test_getbus():
+    bus = os.getbus()
+    osl.drawString(10, 200, "Current bus frequency: %d MHz" % bus)
+
+def test_powertick():
+    os.powertick()
+    osl.drawString(10, 200, "Power management system updated.")
+
+def test_getsystemparam():
+    param_value = os.getsystemparam(os.PSP_SYSTEMPARAM_ID_INT_LANGUAGE) 
+    osl.drawString(10, 200, "System param (language): %s" % param_value)
+
+def test_getnickname():
+    nickname = os.getnickname()
+    osl.drawString(10, 200, "PSP Nickname: %s" % nickname)
+
+def test_freemsspace():
+    free_space = os.freemsspace()
+    osl.drawString(10, 200, "Free MS space: %.2f MB" % (free_space / 1024 / 1024))
+
+def test_realmem():
+    total_allocated = os.realmem(8192)
+    osl.drawString(10, 200, "Total allocated memory: %d bytes" % total_allocated)
+    
+# List of test functions (for easy access)
+test_functions = [
+    test_getcwd, test_mkdir, test_rmdir, test_battery, test_freemem, test_system_call,
+    test_access, test_rename, test_unlink, 
+    test_remove, test_chmod, test_stat, test_system_command,
+    test_getenv, test_putenv, test_delenv, test_listdir,
+    test_setclocks, test_getclocks, test_getclock, test_setclock, test_setbus, test_getbus,
+    test_powertick, test_getsystemparam, test_getnickname, test_freemsspace, test_realmem    
+]
+
+# Main loop to keep the screen updated
+def main():
+    global current_function
+
+    while not osl.mustQuit():
+        osl.startDrawing()
+
+        # Clear the screen with black color
+        osl.clearScreen(osl.RGBA(0, 0, 0, 255))
+
+        # Display the documentation for the current function
+        display_docs()
+
+        # Draw instructions
+        osl.drawString(10, 330, "Use Left/Right to select function.")
+        osl.drawString(10, 350, "Press Cross to run the selected function.")
+
+        # Execute the selected function
+        test_functions[current_function]()
+
+        osl.endDrawing()
+
+        # Handle user input for selecting the function
+        ctrl = osl.Controller()
+        if ctrl.pressed_left:
+            current_function = (current_function - 1) % len(functions)  # Go left
+        elif ctrl.pressed_right:
+            current_function = (current_function + 1) % len(functions)  # Go right
+        elif ctrl.pressed_cross:
+            # Execute the selected function
+            test_functions[current_function]()
+
+        # Sync the frame to prevent the PSP from freezing
+        osl.syncFrame()
+
+# Start the program
+main()
+
+# Cleanup
+osl.endGfx()
+```
+
+## Key differences from modern Python (3.x):
 
 The current build of PSP Python is version 2.5.2 from August 2009, and is based on Stackless 3.1b3 060516 (python-2.51:55047).
 

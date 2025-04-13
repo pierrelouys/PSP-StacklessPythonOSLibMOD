@@ -98,43 +98,65 @@ See `os.stat` for more information.
 ## Functions
 
 ### [access](#access)
-**`access`**(...):  
-MISSING_DOC
+**`access`**(path, mode):  
+- Purpose: Checks if a file exists and if the current user has the given permissions.
+- Parameters: path (str) - Path to the file; mode (int) - Permissions mode.
+- Return: Boolean (True if the file exists and has the required permissions).
+- Notes: Raises OSError if the file does not exist or has insufficient permissions.
+
 
 ### [battery](#battery)
-**`battery`**(...):  
-Returns a tuple (plugged, present, charging, lifep, lifet, temp, volt).  
-- **plugged**: 1 if the PSP is plugged in, 0 else.
-- **present**: 1 if the battery is present, 0 else.
-- **charging**: 1 if the battery is charging, 0 else.
-- **lifep**: life of the battery in percent.
-- **lifet**: life of the battery in minutes (0 if the PSP is plugged in).
-- **temp**: battery temperature (Celsius).
-- **volt**: battery voltage (millivolts).
+**`battery`**():  
+- Description: Retrieves the current battery status.
+- Returns: A tuple containing:
+    - plugged: Whether the PSP is plugged in (1 if plugged, 0 if not).
+    - present: Whether the battery is present (1 if present, 0 if not).
+    - charging: Whether the battery is charging (1 if charging, 0 if not).
+    - lifep: The battery life as a percentage (integer).
+    - lifet: The estimated remaining battery time (integer, in minutes; 0 if the PSP is plugged in).
+    - temp: The battery temperature (integer, in Celsius).
+    - volt: The battery voltage (integer, millivolts).
 
 ### [chdir](#chdir)
-**`chdir`**(...):  
-MISSING_DOC
+**`chdir`**(path):  
+- Description: Changes the current working directory.
+- Parameters:
+    - path: The target directory path (string).
+- Returns: None on success. Raises OSError if the operation fails.
 
 ### [chmod](#chmod)
-**`chmod`**(...):  
-MISSING_DOC
+**`chmod`**(path, mode):  
+- Description: Changes the file permissions of a specified file.
+- Parameters:
+    - path: The path of the file (string).
+    - mode: The new permissions mode for the file (integer).
+- Returns: None on success. Raises OSError on failure.
 
 ### [close](#close)
-**`close`**(...):  
-MISSING_DOC
+**`close`**(fd):  
+- Description: Closes the file associated with the given file descriptor.
+- Parameters:
+    - fd: The file descriptor to close (integer).
+- Returns: None on success. Raises OSError on failure.
 
 ### [delenv](#delenv)
-**`delenv`**(...):  
-MISSING_DOC
+**`delenv`**(...): (no full environment support)
+- Description: This function would typically be used for environment variable handling.
+- Details: On the PSP, these functions are either not supported or implemented as no-ops, and developers should be aware that environment variable handling is minimal or unavailable on this platform.
 
 ### [fdopen](#fdopen)
-**`fdopen`**(...):  
-MISSING_DOC
+**`fdopen`**(fd, mode="r"):  
+- Description: Converts a file descriptor into a Python file object.
+- Parameters:
+    - fd: The file descriptor (integer).
+    - mode: The mode in which to open the file ("r" by default).
+- Returns: A file object (file), or raises an error if the conversion fails.
 
 ### [freemem](#freemem)
-**`freemem`**(...):  
-Returns the total free memory, in bytes. Note: this doesn't seem to work very well, see 'realmem' instead.
+**`freemem`**():
+- Description: Returns the total free memory, in bytes.
+- Returns: The amount of free memory (integer, in bytes).
+- Details: This doesn't seem to work very well, see 'realmem' instead.
 
 ### [freemsspace](#freemsspace)
 **`freemsspace`**():  
@@ -147,100 +169,161 @@ Returns the total free memory, in bytes. Note: this doesn't seem to work very we
 Returns the bus speed in MHz.
 
 ### [getclock](#getclock)
-**`getclock`**(...):  
-Returns the CPU clock speed in MHz.
+**`getclock`**():  
+- Description: Retrieves the current CPU frequency.
+- Returns: The current CPU frequency (integer, in MHz).
 
 ### [getclocks](#getclocks)
-**`getclocks`**(...):  
-MISSING_DOC
+**`getclocks`**():  
+- Description: Retrieves the current CPU and bus frequencies.
+- Returns: A tuple containing the current CPU frequency and bus frequency (both integers in MHz).
 
 ### [getcwd](#getcwd)
-**`getcwd`**(...):  
-MISSING_DOC
+**`getcwd`**():
+- Description: Gets the current working directory.
+- Parameters: None.
+- Returns: The current directory as a string.
+- Details: This function retrieves the current working directory of the PSP file system.
 
 ### [getenv](#getenv)
-**`getenv`**(...):  
-MISSING_DOC
+**`getenv`**(name):  
+- Description: Retrieves the value of an environment variable.
+- Parameters:
+    - name: The name of the environment variable (string).
+- Returns: The value of the environment variable as a string, or None if the variable does not exist.
+- Details: This function does not interact with the PSP’s environment, as it lacks full environment variable support.
 
 ### [getenvdict](#getenvdict)
-**`getenvdict`**(...):  
-MISSING_DOC
+**`getenvdict`**(...): (no full environment support)
+- Description: This function would typically be used for environment variable handling.
+- Details: On the PSP, these functions are either not supported or implemented as no-ops, and developers should be aware that environment variable handling is minimal or unavailable on this platform.
 
 ### [getnickname](#getnickname)
-**`getnickname`**(...):  
-MISSING_DOC
+**`getnickname`**():  
+- Description: Retrieves the PSP’s nickname.
+- Returns: The PSP’s nickname as a string.
+- Details: Uses the system parameter ID for nickname.
 
 ### [getsystemparam](#getsystemparam)
-**`getsystemparam`**(...):  
-MISSING_DOC
+**`getsystemparam`**(id):  
+- Description: Retrieves a specific system parameter.
+- Parameters:
+    - id: The ID of the parameter to retrieve.
+- Returns: The value of the requested system parameter, which could be either an integer or a string, depending on the parameter.
 
 ### [listdir](#listdir)
-**`listdir`**(...):  
-MISSING_DOC
+**`listdir`**(path):  
+- Description: Lists the contents of a directory.
+- Parameters:
+    - path: The directory to list (string).
+- Returns: A list of filenames (strings) in the directory.
+- Details: This function wraps the PSP’s directory reading system calls and returns the names of files and directories inside the given directory, excluding "." and "..".
 
 ### [lstat](#lstat)
 **`lstat`**(...):  
 MISSING_DOC
 
 ### [mkdir](#mkdir)
-**`mkdir`**(...):  
-MISSING_DOC
+**`mkdir`**(path, mode=0):  
+- Description: Creates a new directory at the specified path.
+- Parameters:
+    - path: The directory to create (string).
+    - mode: The permission mode for the directory (integer, default 0).
+- Returns: None on success. Raises OSError on failure.
 
 ### [open](#open)
-**`open`**(...):  
-MISSING_DOC
+**`open`**(path, flags, mode=0777):  
+- Description: Opens a file with the given flags and mode.
+- Parameters:
+    - path: The file path to open (string).
+    - flags: File access flags such as O_RDONLY, O_WRONLY, etc.
+    - mode: (Optional) The file mode (integer, default is 0777).
+- Returns: A file descriptor (integer), or raises an OSError if the file cannot be opened.
 
 ### [powertick](#powertick)
-**`powertick`**(...):  
-Generates a power tick to prevent the PSP from going idle.
+**`powertick`**():  
+- Description: Generates a power tick to prevent the PSP from going idle.
+- Returns: None.
 
 ### [putenv](#putenv)
-**`putenv`**(...):  
-MISSING_DOC
+**`putenv`**(name, value):  
+- Description: Sets the value of an environment variable.
+- Parameters:
+    - name: The name of the environment variable (string).
+    - value: The new value for the variable (string).
+- Returns: None.
+- Details: The PSP platform does not support environment variables in the typical way, so this function has no effect.
 
 ### [realmem](#realmem)
-**`realmem`**(...):  
-Returns the actual free memory. Takes an optional parameter 'size'. This function works by allocating blocks of 'size' bytes until malloc() returns NULL, then freeing all the blocks. 'size' is 4096 by default.
+**`realmem`**(size=4096):
+- Description: Returns the actual free memory.
+- Parameters:
+    - size: The size of the memory blocks to allocate (integer, default is 4096 bytes).
+- Returns: The total memory allocated and freed (integer).
+- Details: This function works by allocating blocks of 'size' bytes until malloc() returns NULL, then freeing all the blocks.
 
 ### [remove](#remove)
 **`remove`**(...):  
 MISSING_DOC
 
 ### [rename](#rename)
-**`rename`**(...):  
-MISSING_DOC
+**`rename`**(src, dst):
+- Description: Renames a file or directory.
+- Parameters:
+    - src: The current name of the file or directory (string).
+    - dst: The new name for the file or directory (string).
+- Returns: None on success. Raises OSError on failure.
 
 ### [rmdir](#rmdir)
-**`rmdir`**(...):  
-MISSING_DOC
+**`rmdir`**(path):  
+- Description: Removes a directory.
+- Parameters:
+    -path: Path of the directory to remove (string).
+- Returns: None on success. Raises OSError if the directory cannot be removed.
 
 ### [setbus](#setbus)
 **`setbus`**(...):  
 Sets the bus speed. Valid values are 1 to 167; an OSError is raised for other values.
 
 ### [setclock](#setclock)
-**`setclock`**(...):  
-Sets the CPU clock speed. Valid values are 1 to 333; an OSError is raised for other values.
+**`setclock`**(cpufreq):  
+- Description: Sets the CPU frequency.
+- Parameters:
+    - cpufreq: The desired CPU frequency (integer, in MHz).
+- Details: Valid values are 1 to 333; an OSError is raised for other values.
 
 ### [setclocks](#setclocks)
-**`setclocks`**(...):  
-MISSING_DOC
+**`setclocks`**(cpufreq, busfreq):  
+- Description: Sets the CPU and bus frequencies.
+- Parameters:
+    - cpufreq: The desired CPU frequency (integer, in MHz).
+    - busfreq: The desired bus frequency (integer, in MHz).
+- Returns: None.
+- Details: This function adjusts the PSP’s performance by modifying its clock frequencies. The valid CPU frequency range is 1-333 MHz, and the bus frequency is 1-167 MHz.
 
 ### [stat](#stat)
-**`stat`**(...):  
-MISSING_DOC
+**`stat`**(path):  
+- Description: Retrieves information about a file or directory.
+- Parameters:
+    - path: The path to the file or directory (string).
+- Returns: A stat_result object that contains details such as file size, permissions, and modification times.
+- Details: This function provides information about the specified file or directory. The returned object can be accessed like a tuple, with fields like st_mode, st_size, st_mtime, and more.
 
 ### [system](#system)
 **`system`**(...):  
 MISSING_DOC
 
 ### [unlink](#unlink)
-**`unlink`**(...):  
-MISSING_DOC
+**`unlink`**(path):  
+- Description: Deletes a file at the specified path.
+- Parameters:
+    - path: The path of the file to remove (string).
+- Returns: None on success. Raises OSError on failure.
 
 ### [utime](#utime)
-**`utime`**(...):  
-MISSING_DOC
+**`utime`**(path, times): (not implemented)
+- Description: Intended to update the access and modification times of a file.
+- Details: This function is defined but not implemented, and developers should not expect it to function. It’s a placeholder for updating file times in the PSP file system.
 
 ---
 
