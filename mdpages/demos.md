@@ -1339,11 +1339,12 @@ main()
 osl.endGfx()
 ```
 
-
 ## Key differences from modern Python (3.x):
 
 The current build of PSP Python is version 2.5.2 from August 2009, and is based on Stackless 3.1b3 060516 (python-2.51:55047).
 
-- Use `print "text" % var` instead of `print(f"{var}")` or `print("text", var)`.
-- No list comprehensions, f-strings, or `with` statements.
-- Use `xrange()` instead of `range()`.
+Some peculiarities of Python 2.51:
+
+- No `with` statement: manually handle opening and closing the file with `(f = open(...)` and `f.close()`.
+- No f-string syntax and no .format() method: use `%s` for string formatting.
+- No `except Exception as e` syntax: use `except Exception, e`.
