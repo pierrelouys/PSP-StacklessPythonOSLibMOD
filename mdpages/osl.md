@@ -24,8 +24,6 @@ Most of the methods listed below wrap OSLib Mod functions, so it can be helpful 
 
 ### [Controller](#controller)
 
-The osl.Controller class represents a game controller and provides access to its button states, analog stick positions, and auto-repeat settings.
-
 #### Methods
 - **__init__():**
     - Description: Creates a new Controller object and initializes it with the current state of the controller by reading key inputs.
@@ -127,8 +125,14 @@ The osl.Controller class represents a game controller and provides access to its
 ### [Font](#font)
 
 #### Methods
-- **__init__(...):** x.<a href="#Font-__init__">`__init__`</a>(filename) Loads a font from a file.
-- **set**(...): Sets this font as the current font.
+- **__init__(filename):**
+    - Description: Initializes a new osl.Font object by loading a font from a file.
+    - Parameters:
+        - filename: A string representing the path to the font file to load.
+    - Notes: wraps oslLoadFontFile(). If loading fails, an error is raised.
+- **set**():
+    - Description: Sets the loaded font as the active font for rendering text.
+    - Notes: wraps oslSetFont().
 
 #### Data and other attributes
 - **__new__** = `<built-in method __new__ of type object at 0x8ac9e5c>`
@@ -136,27 +140,30 @@ The osl.Controller class represents a game controller and provides access to its
 
 ### [Image](#image)
 
-The image module provides PSP-specific image manipulation and rendering, leveraging the OSLib graphics library for hardware-accelerated operations.
-
 #### Methods
-- **__init__(...):** x.<a href="#Image-__init__">`__init__`</a> initializes the image from a file or creates an image.
+- **__init__(initial, location, pf):** 
+    - Description: Initializes a new image object, either loading from a file or creating a new image with the provided dimensions.
+    - Parameters:
+        - initial: A string (filename) or a tuple (width, height).
+        - location: An integer indicating the location of the image (e.g., osl.IN_VRAM).
+        - pf: An integer representing the pixel format (e.g., osl.PF_8888).
 - **clear**(color): 
     - Description: Clears the image with the specified color.
     - Parameters:
         - color: The color to use to clear the image.
     - Notes: Clears the image with a given color.
 - **convert**(newLocation, newFormat): 
-    - Purpose: Converts an image to a new memory location and pixel format on the PSP.
+    - Description: Converts an image to a new memory location and pixel format on the PSP.
     - Parameters: 
         - newLocation: Integer specifying memory location (e.g., osl.IN_RAM, osl.IN_VRAM).
         - newFormat: Integer specifying pixel format (e.g., osl.PF_8888, osl.PF_5650).
-    - Returns: A new image object with the converted image, or raises an exception on failure.
+    - Returns: A new osl.Image object with the converted image.
     - Notes: wraps oslConvertImageTo().
 - **copy**(other, newLocation): 
     - Description: Copies another image into this one.
     - Parameters:
-        - other: The image to copy from.
-        - newLocation: The target location for the copied image (optional).
+        - other: An osl.Image object to copy from.
+        - newLocation: Integer for the target location (default is current location; optional).
 	- Notes: wraps oslCreateImageCopy().
 - **correctHalfBorder**(): 
     - Description: Corrects the half-border issue in the image.
@@ -218,7 +225,7 @@ The image module provides PSP-specific image manipulation and rendering, leverag
 - **swizzleto**(other): 
     - Description: Swizzles the current image to match another image's layout.
     - Parameters:
-        - other: The image whose layout will be matched.
+        - other: An osl.Image object whose layout the current image will match.
 - **tile**(x0, y0, x1, y1): 
     - Description: Creates a tiled copy of the image.
     - Parameters:
@@ -325,25 +332,20 @@ The image module provides PSP-specific image manipulation and rendering, leverag
 - **getChannel**():
     - Description: Retrieves the channel number currently playing the sound.
     - Returns: The channel number (integer).
-    - Notes: wraps oslGetSoundChannel().
 - **loop**(loop=1):
     - Description: Sets whether the sound should loop.
     - Parameters:
         - loop (integer, optional): 1 to loop, 0 to stop looping (default is 1).
-    - Notes: wraps oslSetSoundLoop().
 - **pause**(pause=1):
     - Description: Pauses or unpauses the currently playing sound.
     - Parameters:
         - pause (integer, optional): 1 to pause, 0 to unpause (default is 1).
-    - Notes: wraps oslPauseSound().
 - **play**(voice=0):
     - Description: Plays the loaded sound.
     - Parameters:
         - voice (integer, optional): The voice channel to play the sound on (default is 0).
-    - Notes: wraps oslPlaySound().
 - **stop**():
     - Description: Stops the currently playing sound.
-    - Notes: wraps oslStopSound().
 
 #### Data and other attributes
 - **__new__** = `<built-in method __new__ of type object at 0x8ac9990>`
