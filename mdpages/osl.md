@@ -9,7 +9,6 @@ Most of the methods listed below wrap OSLib Mod functions, so it can be helpful 
 ## Table of Contents
 1. [Classes](#classes)
    - [Controller](#controller)
-   - [Error](#error)
    - [Font](#font)
    - [Image](#image)
    - [Map](#map)
@@ -179,7 +178,7 @@ Most of the methods listed below wrap OSLib Mod functions, so it can be helpful 
         - y: The y-coordinate of the pixel.
         - pixelValue: The color value to assign to the pixel.
     - Notes: Sets the pixel color at the specified coordinates, locking the image during modification.
-- **swizzle**(dst): 
+- **swizzle**(): 
     - Description: Swizzles the current image, changing its internal layout.
     - Notes: Alters the internal layout of the image for optimization or performance. Wraps oslSwizzleImage(dst, self)
 - **swizzleto**(other): 
