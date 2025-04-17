@@ -556,14 +556,14 @@ Most of the methods listed below wrap OSLib Mod functions, so it can be helpful 
 - **`safeQuit`**():
     - Purpose: Marks the program for safe quitting.
     - Notes: This sets a flag to indicate the program should quit, but may not terminate immediately.
-- **`saveScreenshot`**(...):
-    - Description: Saves the current screen as a PNG file.
+- **`saveScreenshot`**(fileName):
+    - Description: Saves the contents of osl.SECONDARY_BUFFER as a PNG with alpha channel.
     - Parameters:
         - fileName: The name of the file to save the screenshot as.
 - **`setAlpha`**(effect, coeff):
     - Description: Sets the alpha blending effect and coefficient.
     - Parameters:
-        - effect: Blending effect type (integer).
+        - effect: Blending effect type (integer, e.g. osl.FX_ALPHA).
         - coeff: Coefficient for the effect (integer).
 - **`setBilinearFilter`**(enable=1):
     - Description: Enables or disables bilinear filtering.
@@ -623,7 +623,7 @@ Most of the methods listed below wrap OSLib Mod functions, so it can be helpful 
     - Parameters:
         - enabled: Flag to enable or disable quitting on load failure (1 for enabled, 0 for disabled).
     - Details: This function allows the developer to specify whether the program should automatically quit if it fails to load a resource (e.g., an image or file) .
-- **`setScreenClipping`**(...):
+- **`setScreenClipping`**(x1, y1, x2, y2):
     - Description: Sets the screen clipping area.
     - Parameters:
         - x1, y1: Top-left corner of the clipping area (integers).
@@ -682,41 +682,41 @@ Most of the methods listed below wrap OSLib Mod functions, so it can be helpful 
 - **ERR_WLAN_OFF** = -16
 - **FMT_NONE** = 0
 - **FMT_STREAM** = 1024
-- **FX_ADD** = 3
-- **FX_ALPHA** = 2
+- **FX_ADD** = 3: Additive blending; brightens destination.
+- **FX_ALPHA** = 2: Standard alpha blending.
 - **FX_COLOR** = 4096
-- **FX_FLAT** = 1
-- **FX_NONE** = 0
-- **FX_RGBA** = 256
-- **FX_SUB** = 4
-- **INTRAFONT_ACTIVE** = 145110268
-- **INTRAFONT_ADVANCE_H** = 145109992
-- **INTRAFONT_ADVANCE_V** = 145110012
-- **INTRAFONT_ALIGN_CENTER** = 145110056
-- **INTRAFONT_ALIGN_FULL** = 145110104
-- **INTRAFONT_ALIGN_LEFT** = 145110032
-- **INTRAFONT_ALIGN_RIGHT** = 145110080
-- **INTRAFONT_CACHE_ALL** = 145110356
-- **INTRAFONT_CACHE_ASCII** = 145110332
-- **INTRAFONT_CACHE_LARGE** = 145110308
-- **INTRAFONT_CACHE_MED** = 145110288
-- **INTRAFONT_SCROLL_LEFT** = 145110128
-- **INTRAFONT_SCROLL_RIGHT** = 145110176
-- **INTRAFONT_SCROLL_SEESAW** = 145110152
-- **INTRAFONT_SCROLL_THROUGH** = 145110200
-- **INTRAFONT_STRING_ASCII** = 145110376
-- **INTRAFONT_STRING_BIG5** = 145110544
-- **INTRAFONT_STRING_CP1251** = 145110568
-- **INTRAFONT_STRING_CP1252** = 145110592
-- **INTRAFONT_STRING_CP437** = 145110400
-- **INTRAFONT_STRING_CP850** = 145110424
-- **INTRAFONT_STRING_CP866** = 145110448
-- **INTRAFONT_STRING_GBK** = 145110496
-- **INTRAFONT_STRING_KOR** = 145110520
-- **INTRAFONT_STRING_SJIS** = 145110472
-- **INTRAFONT_STRING_UTF8** = 145110616
-- **INTRAFONT_WIDTH_FIX** = 145110248
-- **INTRAFONT_WIDTH_VAR** = 145110228
+- **FX_FLAT** = 1: Uniform alpha using coeff; ignores source alpha.
+- **FX_NONE** = 0: No alpha blending; draws fully opaque.
+- **FX_RGBA** = 256: Uses source RGBA alpha, scaled by coeff.
+- **FX_SUB** = 4 Subtractive blending; darkens destination.
+- **<s>INTRAFONT_ACTIVE</s>** = 145110268
+- **<s>INTRAFONT_ADVANCE_H</s>** = 145109992
+- **<s>INTRAFONT_ADVANCE_V</s>** = 145110012
+- **<s>INTRAFONT_ALIGN_CENTER</s>** = 145110056
+- **<s>INTRAFONT_ALIGN_FULL</s>** = 145110104
+- **<s>INTRAFONT_ALIGN_LEFT</s>** = 145110032
+- **<s>INTRAFONT_ALIGN_RIGHT</s>** = 145110080
+- **<s>INTRAFONT_CACHE_ALL</s>** = 145110356
+- **<s>INTRAFONT_CACHE_ASCII</s>** = 145110332
+- **<s>INTRAFONT_CACHE_LARGE</s>** = 145110308
+- **<s>INTRAFONT_CACHE_MED</s>** = 145110288
+- **<s>INTRAFONT_SCROLL_LEFT</s>** = 145110128
+- **<s>INTRAFONT_SCROLL_RIGHT</s>** = 145110176
+- **<s>INTRAFONT_SCROLL_SEESAW</s>** = 145110152
+- **<s>INTRAFONT_SCROLL_THROUGH</s>** = 145110200
+- **<s>INTRAFONT_STRING_ASCII</s>** = 145110376
+- **<s>INTRAFONT_STRING_BIG5</s>** = 145110544
+- **<s>INTRAFONT_STRING_CP1251</s>** = 145110568
+- **<s>INTRAFONT_STRING_CP1252</s>** = 145110592
+- **<s>INTRAFONT_STRING_CP437</s>** = 145110400
+- **<s>INTRAFONT_STRING_CP850</s>** = 145110424
+- **<s>INTRAFONT_STRING_CP866</s>** = 145110448
+- **<s>INTRAFONT_STRING_GBK</s>** = 145110496
+- **<s>INTRAFONT_STRING_KOR</s>** = 145110520
+- **<s>INTRAFONT_STRING_SJIS</s>** = 145110472
+- **<s>INTRAFONT_STRING_UTF8</s>** = 145110616
+- **<s>INTRAFONT_WIDTH_FIX</s>** = 145110248
+- **<s>INTRAFONT_WIDTH_VAR</s>** = 145110228
 - **IN_RAM** = 2
 - **IN_VRAM** = 1
 - **KEYMASK_CIRCLE** = 8192
