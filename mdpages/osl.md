@@ -386,7 +386,7 @@ Most of the methods listed below wrap OSLib Mod functions, so it can be helpful 
         - x1, y1: Coordinates of the top-left corner.
         - x2, y2: Coordinates of the bottom-right corner.
         - color: Color of the filled rectangle.
-- **`drawGradientRect`**(...):
+- **`drawGradientRect`**(x1, y1, x2, y2, c1, c2, c3, c4):
     - Description: Draws a gradient rectangle on the screen.
     - Parameters:
         - x1, y1: Top-left corner coordinates (integers).
@@ -438,7 +438,7 @@ Most of the methods listed below wrap OSLib Mod functions, so it can be helpful 
 - **`flushDataCache`**():
     - Description: Flushes the PSP’s data cache.
     - Notes: This function is useful when data changes are made in memory that need to be committed to the PSP's memory cache.
-- **`flushKey`**(...):
+- **`flushKey`**():
     - Purpose: Clears the key buffer.
 - **`getDialogButtonPressed`**():
     - Description: Gets the button pressed in the current dialog.
