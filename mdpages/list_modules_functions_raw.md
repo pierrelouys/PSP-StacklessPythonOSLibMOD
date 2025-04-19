@@ -137,7 +137,7 @@ drawLine(int, int, int, int, int)
 drawOsk(): Renders on-screen keyboard.
 drawRect(int, int, int, int, int)
 drawString(int, int, str): Takes x, y coordinates and text.
-drawTextBox(x0, y0, x1, y1, string, format)
+drawTextBox(x0, y0, x1, y1, string, format): CP437 charset.
 endDialog(): Closes active dialog.
 endDrawing(): Ends drawing operations for the frame.
 endFrame(): Ends the current frame.
@@ -167,7 +167,7 @@ oskGetResult(): Returns int. Gets OSK result.
 oskGetText(): Returns str. Gets text entered in OSK.
 oskIsActive(): Returns bool. Checks if OSK is active.
 print
-printxy(int, int, str): Takes x, y coordinates and text.
+printxy(int, int, str): Takes x, y coordinates and text. CP437 charset.
 safeQuit
 saveScreenshot(fileName)
 setAlpha(effect, coeff): Takes integer (e.g. osl.FX_ALPHA) and coefficient for the effect (integer).

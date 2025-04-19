@@ -87,10 +87,12 @@ Most of the methods listed below wrap OSLib Mod functions, so it can be helpful 
 
 #### Methods
 - **__init__(filename):**
-    - Description: Initializes a new osl.Font object by loading a font from a file.
+    - Description: Initializes a new osl.Font object by loading a font from a file. May support extended character sets, such as CP1252.
     - Parameters:
-        - filename: A string representing the path to the font file to load.
-    - Notes: wraps oslLoadFontFile(). If loading fails, an error is raised.
+        - filename: Path to the .oft font file to load.
+    - Notes: 
+	    - wraps oslLoadFontFile(). If loading fails, an error is raised.
+		- OFT font files may be created with the [OSLFonts utility](https://github.com/pierrelouys/OSLFonts).
 - **set**():
     - Description: Sets the loaded font as the active font for rendering text.
     - Notes: wraps oslSetFont().
@@ -413,9 +415,9 @@ Most of the methods listed below wrap OSLib Mod functions, so it can be helpful 
     - Parameters:
         - x, y: Coordinates where to draw the string.
         - string: The string to draw.
-    - Notes: This function is used for basic text rendering. The position (x, y) specifies where the text will appear on the screen, starting from the top-left corner. Text rendering is often used for debugging or displaying simple UI elements.	
+    - Notes: Depending on the loaded font, it may support extended character sets, such as CP1252.
 - **`drawTextBox`**(x0, y0, x1, y1, string, format):
-    - Description: Draws a text box with specified dimensions and text inside it.
+    - Description: Draws a text box with specified dimensions and text inside it. CP437 charset.
     - Parameters:
         - x0, y0: The top-left corner coordinates (integers).
         - x1, y1: The bottom-right corner coordinates (integers).
@@ -548,7 +550,7 @@ Most of the methods listed below wrap OSLib Mod functions, so it can be helpful 
         - text: The text to print.
     - Notes: This function outputs text in the console for debugging purposes.
 - **`printxy`**(x, y, text):
-    - Description: Prints text to screen at a specific position.
+    - Description: Prints text to screen at a specific position. Supports the characters of the CP437 character set.
     - Parameters:
         - x: The x-coordinate (integer).
         - y: The y-coordinate (integer).
