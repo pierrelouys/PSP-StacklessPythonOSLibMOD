@@ -50,7 +50,7 @@ jobs:
             WITH_SQLITE=1 \
             WITH_PSPOGG=1 \
             WITH_PSPMP3=1 \
-            WITH_EXPCETION_HANDLER=0 \
+            WITH_EXPCETION_HANDLER=1 \
             WITH_SSL=0
 
       - name: Upload EBOOT
