@@ -875,7 +875,7 @@ floattime(void)
     // better resolution.
 
     time_t now;
-    struct timeval t;
+    SceKernelTimeval t;
     double res;
 
     sceKernelLibcTime(&now);
@@ -883,7 +883,7 @@ floattime(void)
 
     if (sceKernelLibcGettimeofday(&t, NULL) == 0)
     {
-       res += t.tv_usec*0.000001;
+       res += t.tv_usec * 0.000001;
     }
 
     return res;
