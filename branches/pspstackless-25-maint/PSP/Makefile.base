@@ -135,7 +135,7 @@ OBJECTS_OBJECTS = \
 	../Objects/unicodectype.o \
 	../Objects/unicodeobject.o \
 	../Objects/descrobject.o \
-	../Objects/weakref.o \
+	../Objects/weakrefobject.o \
 	../Objects/structseq.o \
 	../Objects/setobject.o \
 	../Objects/exceptions.o \
