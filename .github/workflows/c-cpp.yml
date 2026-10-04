@@ -1,10 +1,13 @@
-name: C/C++ CI
+name: PSP build
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - master
   pull_request:
-    branches: [ "master" ]
+    branches:
+      - master
+  workflow_dispatch:
 
 jobs:
   build:
@@ -12,23 +15,47 @@ jobs:
     container: pspdev/pspdev:latest
 
     steps:
-      - name: Install dependencies
-        run: |
-          apk add bash cmake git gmp mpc1 mpfr4 make
-      - run: |
-          git config --global --add safe.directory /__w/PSP-StacklessPythonOSLibMOD/PSP-StacklessPythonOSLibMOD
-      
       - name: Checkout
-        uses: actions/checkout@v2
-      
-      - name: Build
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install PSP libraries
         run: |
-          git submodule update --init --recursive --remote 
-          # cd branches/pspstackless-25-maint/PSP/
-          # make -f Makefile.base
-      - name: Publish artifacts
+          apk add --no-cache bash git make
+          psp-pacman -Sy
+          psp-pacman -S --noconfirm \
+            oslib \
+            sqlite \
+            tremor \
+            bzip2
+
+      - name: Show PSP toolchain
+        run: |
+          echo "PSPDEV=${PSPDEV}"
+          which psp-gcc
+          which psp-config
+          psp-gcc --version
+          psp-config --pspsdk-path
+
+      - name: Build Stackless Python for PSP
+        working-directory: branches/pspstackless-25-maint/PSP
+        run: |
+          make -f Makefile \
+            WITH_PSP2D=0 \
+            WITH_PSPSND=0 \
+            WITH_PSPNET=1 \
+            WITH_OSLIB=1 \
+            WITH_OSLIB_MOD=1 \
+            WITH_SQLITE=1 \
+            WITH_PSPOGG=1 \
+            WITH_PSPMP3=1 \
+            WITH_EXPCETION_HANDLER=0 \
+            WITH_SSL=0
+
+      - name: Upload EBOOT
         uses: actions/upload-artifact@v4
         with:
-          name: Python
-          path: |
-            EBOOT.PBP
+          name: StacklessPSP
+          path: branches/pspstackless-25-maint/PSP/EBOOT.PBP
+          if-no-files-found: error
