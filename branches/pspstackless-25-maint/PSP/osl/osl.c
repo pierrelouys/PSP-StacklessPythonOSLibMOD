@@ -899,7 +899,7 @@ static PyObject* osl_intraFontSetStyle(PyObject *self,
        return NULL;
     }
 
-    oslIntraFontSetStyle(font->pFont, size, color, shadowcolor, options);
+    oslIntraFontSetStyle(font->pFont, size, color, shadowcolor, 0.0f, options);
 
     Py_INCREF(Py_None);
     return Py_None;
