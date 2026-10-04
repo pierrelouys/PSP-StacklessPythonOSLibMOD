@@ -12,7 +12,6 @@ PSP_EBOOT_ICON = icon_slp252.png
 #PSP_EBOOT_UNKPNG = pic0.png
 #PSP_EBOOT_PIC1 = pic1.png
 #PSP_EBOOT_SND0 = snd0.at3
-
 MODULES_STATIC = \
 	Modules/config.o \
 	Modules/pspos.o \
@@ -65,8 +64,7 @@ MODULES_STATIC = \
 	../Modules/expat/xmltok.o \
 	../Modules/_elementtree.o \
 	../Modules/_functoolsmodule.o \
-	../Modules/bz2module.o \
-
+	../Modules/bz2module.o
 OBJECTS_PYTHON = \
     ../Python/ast.o \
     ../Python/Python-ast.o \
@@ -107,7 +105,6 @@ OBJECTS_PYTHON = \
 	../Python/pystrtod.o \
 	../Python/thread.o \
 	../Python/getmtime.o
-
 OBJECTS_OBJECTS = \
 	../Objects/typeobject.o \
 	../Objects/tupleobject.o \
@@ -138,14 +135,12 @@ OBJECTS_OBJECTS = \
 	../Objects/unicodectype.o \
 	../Objects/unicodeobject.o \
 	../Objects/descrobject.o \
-	../Objects/weakrefobject.o \
+	../Objects/weakref.o \
 	../Objects/structseq.o \
 	../Objects/setobject.o \
 	../Objects/exceptions.o \
 	../Objects/genobject.o \
 	../Objects/codeobject.o
-
-
 OBJECTS_PARSER = \
 	../Parser/tokenizer.o \
 	../Parser/printgrammar.o \
@@ -161,7 +156,6 @@ OBJECTS_PARSER = \
 	../Parser/firstsets.o \
 	../Parser/bitset.o \
 	../Parser/acceler.o
-
 OBJS_STACKLESS = ../Stackless/core/cframeobject.o \
 	../Stackless/core/slp_transfer.o \
 	../Stackless/core/stackless_util.o \
@@ -173,7 +167,6 @@ OBJS_STACKLESS = ../Stackless/core/cframeobject.o \
 	../Stackless/module/taskletobject.o \
 	../Stackless/pickling/prickelpit.o \
 	../Stackless/pickling/safe_pickle.o
-
 OBJS_SQLITE = ../Modules/_sqlite/cache.o \
               ../Modules/_sqlite/connection.o \
               ../Modules/_sqlite/cursor.o \
@@ -183,7 +176,6 @@ OBJS_SQLITE = ../Modules/_sqlite/cache.o \
               ../Modules/_sqlite/row.o \
               ../Modules/_sqlite/statement.o \
               ../Modules/_sqlite/util.o
-
 OBJS_PSP2D = psp2d/psp2d.o \
 	psp2d/controller.o \
 	psp2d/screen.o \
@@ -202,7 +194,6 @@ OBJS_PSPSND = \
 	pspsnd/music.o
 
 OBJS_PSPNET = pspnet/pspnet.o
-
 OBJS_OSLIB = osl/osl.o osl/image.o osl/ctrl.o osl/sound.o osl/map.o osl/font.o
 OBJS_OSLIB_MOD = osl/sfont.o
 OBJS_EXCEPTION_HANDLER = exceptionhandler/exception.o
@@ -216,7 +207,6 @@ OBJS_SSL = ../Modules/_ssl.o \
 
 OBJS = main.o psperror.o support.o \
 	$(MODULES_STATIC) $(OBJECTS_PYTHON) $(OBJECTS_OBJECTS) $(OBJECTS_PARSER) $(OBJS_STACKLESS)
-
 CPPFLAGS=-Ipsp2d -I../../cpplibs -I../../imaging -I../../pymaging
 LDFLAGS=-L../../cpplibs -L../../imaging/build-psp
 LIBS=
@@ -233,7 +223,6 @@ LDFAGS += -Llibpsp2d
 LIBS += -lpsp2d -limaging -ljpeg -lpng -lz -lpspgu
 CPPFLAGS += -DWITH_PSP2D -DIMAGING_MODULE_NAME=\"psp2d\"
 endif
-
 ifeq ($(WITH_PSPSND),1)
 OBJS += $(OBJS_PSPSND)
 LDFLAGS += -Llibpspsnd
@@ -252,7 +241,6 @@ OBJS += $(OBJS_OSLIB)
 LIBS += -losl -lpng -lz -lpspgu -lpspgum -lpspaudio -lpsphprm -ljpeg
 CPPFLAGS += -DWITH_OSLIB
 endif
-
 ifeq ($(WITH_OSLIB_MOD),1)
 OBJS += $(OBJS_OSLIB_MOD)
 LIBS += -lpsphttp -lpspssl -lpspwlan
@@ -275,7 +263,6 @@ OBJS += $(OBJS_PSPMP3)
 LIBS += -lpspaudio -lpspaudiocodec
 CPPFLAGS += -DWITH_PSPMP3
 endif
-
 ifeq ($(WITH_SSL),1)
 OBJS += $(OBJS_SSL)
 LIBS += -lssl -lcrypto
@@ -289,7 +276,7 @@ CPPFLAGS += -I../Modules/expat -DHAVE_MEMMOVE
 
 LIBS += -lc -lm
 
-CFLAGS = -Os -g -G0 -Wall -Wno-strict-aliasing -fPIC
+CFLAGS = -Os -g -G0 -Wall -Wno-strict-aliasing
 CXXFLAGS = $(CFLAGS) -fno-rtti -fno-strict-aliasing
 ASFLAGS = $(CFLAGS)
 
@@ -297,12 +284,10 @@ LIBDIR =
 
 PSPSDK=$(shell psp-config --pspsdk-path)
 include $(PSPSDK)/lib/build.mak
-
 psperror.c:
 	@cp $(PSPDEV)/psp/sdk/include/pspkerror.h ./pspkerror.h
 	python generr.py
 	@rm pspkerror.h
-
 release: distclean $(PSP_EBOOT)
 	@echo "###### Create release package ######"
 	@echo "1. Creating release directory $(RELEASE_DIRECTORY)/"
@@ -310,14 +295,13 @@ release: distclean $(PSP_EBOOT)
 	@echo "2. Copying EBOOT to release dir."
 	@cp -pR EBOOT.PBP $(RELEASE_DIRECTORY)/
 	@echo "3. Copying Python libraries to release dir."
-	@cd ../Lib && find . -path '*/.svn*' -prune -o -path '*/plat-*' -prune -o -path './test*' -prune -o -path '*/msilib*' -prune -o -path '*/curses*' -prune -o -path '*/idlelib*' -prune -o -path '*/lib-tk*' -prune -o -path '*/lib-old*' -prune -o -path '*/distutils*' -prune -o -print | zip $(RELEASE_DIRECTORY)/python.zip -q@
+	@cd ../Lib && find . -path '*/.svn*' -prune -o -path '*/plat-*' -prune -o -path './test*' -prune -o -path '*/msilib*' -prune -o -path '*/curses*' -prune -o -path '*/idlelib*' -prune -o -path '*/lib-tk*' -prune -o -path '*/lib-old*' -prune -o -print | zip $(RELEASE_DIRECTORY)/python.zip -q@
 	@mkdir -p site-packages
 	@cp -pR elementtree/elementtree site-packages/
 	@find ./site-packages/ -path '*/.svn*' -prune -o -print | zip $(RELEASE_DIRECTORY)/python.zip -q@
 	@rm -rf site-packages
 	@echo "4. Release dir created on $(RELEASE_DIRECTORY)."
 	@echo "###### Done ######"
-
 distclean:
 	@echo "Cleaning $(RELEASE_DIRECTORY)"
 	@rm -rf $(RELEASE_DIRECTORY)
