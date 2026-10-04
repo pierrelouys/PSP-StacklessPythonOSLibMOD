@@ -254,7 +254,7 @@ endif
 
 ifeq ($(WITH_PSPOGG),1)
 OBJS += $(OBJS_PSPOGG)
-LIBS += -lvorbisidec -lpspaudiolib -lpspaudio
+LIBS += -lvorbisidec -logg -lpspaudiolib -lpspaudio
 CPPFLAGS += -DWITH_PSPOGG
 endif
 
