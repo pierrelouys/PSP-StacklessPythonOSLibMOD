@@ -1645,7 +1645,7 @@ void initosl(void)
     ADDINT(DIALOG_LOAD);*/
 
     ADDINT(OSK_CANCEL);
-    ADDINT(OSK_OK);
+    PyModule_AddIntConstant(mdl, "OSK_OK", 0);
 
     ADDINT(NET_ERROR_NET);
     ADDINT(NET_ERROR_INET);
