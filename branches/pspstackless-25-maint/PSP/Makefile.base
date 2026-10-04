@@ -276,7 +276,7 @@ CPPFLAGS += -I../Modules/expat -DHAVE_MEMMOVE
 
 LIBS += -lc -lm
 
-CFLAGS = -Os -g -G0 -Wall -Wno-strict-aliasing
+CFLAGS = -Os -g -G0 -Wall -Wno-strict-aliasing -std=gnu99
 CXXFLAGS = $(CFLAGS) -fno-rtti -fno-strict-aliasing
 ASFLAGS = $(CFLAGS)
 
