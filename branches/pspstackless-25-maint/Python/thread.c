@@ -117,6 +117,10 @@ static size_t _pythread_stacksize = 0;
 #undef _POSIX_THREADS
 #endif
 
+#ifdef PSP
+#undef _POSIX_THREADS
+#endif
+
 #ifdef _POSIX_THREADS
 #include "thread_pthread.h"
 #endif
