@@ -7,6 +7,7 @@
 #include <pspkerneltypes.h>
 #include <pspnet_resolver.h>
 #include <pspnet_inet.h>
+#include <arpa/inet.h>
 
 #define MAX_NAME 512
 
@@ -90,7 +91,7 @@ struct hostent *psp_gethostbyname(const char *name)
 	static char *addrlist[2] = { (char *) &saddr, NULL };
 	int rid;
 
-	if(sceNetInetInetAton(name, &saddr) == 0)
+	if(inet_aton(name, &saddr) == 0)
 	{
 		int err;
 
